@@ -8,12 +8,12 @@
 " Avoid modifying this section, unless you are very sure of what you are doing
 
 let vim_plug_just_installed = 0
-let vim_plug_path = expand('/root/.vim/autoload/plug.vim')
+let vim_plug_path = expand('/home/chara/.vim/autoload/plug.vim')
 if !filereadable(vim_plug_path)
     echo "Installing Vim-plug..."
     echo ""
-    silent !mkdir -p /root/.vim/autoload
-    silent !curl -fLo /root/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !mkdir -p /home/chara/.vim/autoload
+    silent !curl -fLo /home/chara/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     let vim_plug_just_installed = 1
 endif
 
@@ -47,7 +47,7 @@ autocmd FileType javascript let b:syntastic_javascript_jscs_args =
 " install plugins with :PlugInstall
 " clean unused plugins :PlugClean
 "
-call plug#begin('/root/.vim/plugged')
+call plug#begin('/home/chara/.vim/plugged')
 
 Plug 'morhetz/gruvbox'      " color scheme
 Plug 'tpope/vim-fugitive'   " git integration
@@ -109,6 +109,7 @@ set mouse-=a               " disable custom mouse in vim (so that we can select
 "if has("mouse")
 "    set mouse=a             " control cursor with the mouse
 "endif
+"set guifont=FiraCode-Retina:h12
 syntax on                   " syntax highlighting
 
 set encoding=utf-8
@@ -135,7 +136,7 @@ set nowrap                  " no wrapping of long lines
 set noswapfile
 set nobackup                " because undodir/undofile
 if has('persistent_undo')
-    set undodir=/root/.vim/undodir
+    set undodir=/home/chara/.vim/undodir
     set undofile
     if !isdirectory(&undodir)
         call mkdir(&undodir, "p")
@@ -172,12 +173,12 @@ endif
 
 set cursorline              " highlight the line of the cursor
 if exists("&colorcolumn")
-    set colorcolumn=80          " highlight column #80
+    set colorcolumn=120          " highlight column #80
 endif
-highlight CorlorColumn ctermbg=0 guibg=lightgrey
-" highlight text beyond column 80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+" highlight text beyond column 120
 highlight OverLength ctermbg=71 ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+match OverLength /\%121v.\+/
 
 
 " the default file browser in vim is netrw (cmd :Explore)
@@ -300,11 +301,6 @@ omap < [
 omap > ]
 xmap < [
 xmap > ]
-xmap < "
-xmap > "
-xmap < '
-xmap > '
-
 
 "Use this variable to change symbols.
 
@@ -330,16 +326,6 @@ let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
 
 
 
-
-" TextEdit might fail if hidden is not set.
-set hidden
-
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-
-" Give more space for displaying messages.
-set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -528,6 +514,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 " defines a `leader key` for custom shortcuts
 let mapleader=" "
 
+
 " REMAPs
 
 " move cursor to other splits
@@ -538,8 +525,8 @@ nnoremap <leader>l :wincmd l<CR>
 " open explorer
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 " resize splits
-nnoremap <silent> <Leader>+ :vertical resize +5<CR>
-nnoremap <silent> <Leader>- :vertical resize -5<CR>
+nnoremap <silent> <leader>+ :vertical resize +5<CR>
+nnoremap <silent> <leader>- :vertical resize -5<CR>
 
 nmap ]c <Plug>GitGutterNextHunk
 nmap [c <Plug>GitGutterPrevHunk
