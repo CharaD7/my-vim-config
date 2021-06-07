@@ -7,7 +7,7 @@ Vim configuration with all recommended plugins and gruvbox theme
 
 Copy the .vimrc file, vim and .vim directories to your root directory and run the following:
 
-````
+```
 1. cd vim
     ./configure --with-features=huge \
                 --enable-multibyte \
@@ -23,6 +23,7 @@ Copy the .vimrc file, vim and .vim directories to your root directory and run th
                 --enable-multibyte \
                 --with-x \
                 --prefix=/usr
+```
 _Note that the python3-config-dir given there is your python3 version directory. You can check it out by running **ls /usr/lib/python3.9**_
 
 After compilation is done, move to this step
@@ -37,7 +38,7 @@ After compilation is done, move to this step
 
 6 Vim launches and tries to install the necessary plugins. If you do not see the installation, use **:PlugInstall** to get it started.
 
-````
+
 
 You may have to run _apt-get install python-vim_
 
