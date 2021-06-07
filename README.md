@@ -24,7 +24,7 @@ Copy the .vimrc file, vim and .vim directories to your root directory and run th
                 --with-x \
                 --prefix=/usr
 ```
-_Note that the python3-config-dir given there is your python3 version directory. You can check it out by running **ls /usr/lib/python3.9**_
+_Note that the python3-config-dir given there is your python3 version directory. You can check it out by running ```ls /usr/lib/python3.9```_
 
 After compilation is done, move to this step
 
@@ -48,11 +48,11 @@ You may have to run _apt-get install python-vim_
 
 1. Go to download [Oh-My-Zsh](https://gist.github.com/dogrocker/1efb8fd9427779c827058f873b94df95) and follow the steps to set it up
 
-2. Run in your terminal _pip install powerline-shell_ or _pip3 install powerline-shelll__ if you have pip install doesn't work for you
+2. Run in your terminal ```pip install powerline-shell``` or ```pip3 install powerline-shelll``` if you have pip install doesn't work for you
 
 3. Copy the content of the bonus folder to your root directory to replace your vim and bash configurations
 
-4. Run **source .bzshrc** and then run **source .zshrc** 
+4. Run ```source .bzshrc``` and then run ```source .zshrc``` 
 
 5. If your fonts do not work well, copy the _.local_ folder to your root directory and source again.
 
