@@ -322,7 +322,7 @@ let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time
 let g:NERDTreeGitStatusUntrackedFilesMode = 'all' " a heavy feature too. default: normal
 let g:NERDTreeGitStatusShowClean = 1 " default: 0
 let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
-
+let NERDTreeShowHidden=1 " Show hidden files in the tree
 
 
 
