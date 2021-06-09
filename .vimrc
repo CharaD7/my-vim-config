@@ -38,7 +38,6 @@ autocmd FileType javascript let b:syntastic_javascript_jscs_args =
     \ FindConfig('-c', '.jscsrc', expand('<afile>:p:h', 1))
 
 
-
 " ============================================================================
 
 " ---- PLUGINS ----------------------------------------------------------------
@@ -74,13 +73,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'valloric/youcompleteme'
-
-
-
-
-
-
-
+Plug 'tmsvg/pear-tree' " For pairing tags and parentheses
 
 
 " Or build from source code by using yarn: https://yarnpkg.com
@@ -93,7 +86,6 @@ Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 " -----------------------------------------------------------------------------
-
 
 " ============================================================================
 " Install plugins the first time vim runs
@@ -114,8 +106,8 @@ syntax on                   " syntax highlighting
 
 set encoding=utf-8
 
-" hides buffers instead of closing them. This means that you can have unwritten 
-" changes to a file and open a new file using :e, without being forced to write 
+" hides buffers instead of closing them. This means that you can have unwritten
+" changes to a file and open a new file using :e, without being forced to write
 " or undo your changes first
 "set hidden
 
@@ -123,7 +115,6 @@ set encoding=utf-8
 
 set visualbell
 set noerrorbells            " no sounds
-
 set tabstop=4               " size of tabs   (set ts=4 also works)
 set shiftwidth=4            " indent using '>' uses 4 spaces
 set softtabstop=4
@@ -132,7 +123,6 @@ set smartindent
 set number                  " line numbers (set nu)
 set relativenumber
 set nowrap                  " no wrapping of long lines
-
 set noswapfile
 set nobackup                " because undodir/undofile
 if has('persistent_undo')
@@ -153,8 +143,6 @@ set cmdheight=2             " more space for displaying msgs
 
 " when scrolling, keep cursor 3 lines away from screen border
 set scrolloff=3
-
-
 
 " colours/theme
 set background=dark
@@ -189,7 +177,6 @@ let g:netrw_winsize = 25        " sets the width to 25% of the page
 let g:netrw_liststyle = 3       " default list style (key `i`)
 
 
-let g:rainbow_active = 1
 let g:rainbow_active = 1
 
 let g:rainbow_load_separately = [
@@ -230,24 +217,10 @@ let g:syntastic_always_populate_loc_list = 1
 
 
 " NERDTree trigger
-map <C-e> :NERDTreeToggle<CR> 
+map <C-e> :NERDTreeToggle<CR>
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-t> :NERDTree<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
-
-
-" Multiple cursor configuration
-let g:multi_cursor_use_default_mapping=0
-
-" Default mapping
-let g:multi_cursor_start_word_key      = '<C-n>'
-let g:multi_cursor_select_all_word_key = '<A-n>'
-let g:multi_cursor_start_key           = 'g<C-n>'
-let g:multi_cursor_select_all_key      = 'g<A-n>'
-let g:multi_cursor_next_key            = '<C-n>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
 
 
 " Registering lightline components
@@ -322,9 +295,7 @@ let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time
 let g:NERDTreeGitStatusUntrackedFilesMode = 'all' " a heavy feature too. default: normal
 let g:NERDTreeGitStatusShowClean = 1 " default: 0
 let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
-let NERDTreeShowHidden=1 " Show hidden files in the tree
-
-
+let NERDTreeShowHidden=1 " Show hidden files in NERDTree
 
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
@@ -480,6 +451,49 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 
+" Default rules for matching in pear-tree:
+let g:pear_tree_pairs = {
+            \ '(': {'closer': ')'},
+            \ '[': {'closer': ']'},
+            \ '{': {'closer': '}'},
+            \ "'": {'closer': "'"},
+            \ '"': {'closer': '"'},
+            \ '/**': {'closer': '**/'},
+            \ '<!--': {'closer': '-->'}
+            \ }
+" See pear-tree/after/ftplugin/ for filetype-specific matching rules
+
+" Pear Tree is enabled for all filetypes by default:
+let g:pear_tree_ft_disabled = []
+
+" Pair expansion is dot-repeatable by default:
+let g:pear_tree_repeatable_expand = 1
+
+" Smart pairs are disabled by default:
+let g:pear_tree_smart_openers = 0
+let g:pear_tree_smart_closers = 0
+let g:pear_tree_smart_backspace = 0
+
+" If enabled, smart pair functions timeout after 60ms:
+let g:pear_tree_timeout = 60
+
+" Automatically map <BS>, <CR>, and <Esc>
+" let g:pear_tree_map_special_keys = 1
+
+" Default mappings:
+" imap <BS> <Plug>(PearTreeBackspace)
+" imap <CR> <Plug>(PearTreeExpand)
+" imap <Esc> <Plug>(PearTreeFinishExpansion)
+" Pear Tree also makes <Plug> mappings for each opening and closing string.
+"     :help <Plug>(PearTreeOpener)
+"     :help <Plug>(PearTreeCloser)
+
+" Not mapped by default:
+" <Plug>(PearTreeSpace)
+" <Plug>(PearTreeJump)
+" <Plug>(PearTreeExpandOne)
+" <Plug>(PearTreeJNR)
+
 " Avoid conflicting with neocomplete
 function! Multiple_cursors_before()
   if exists(':NeoCompleteLock')==2
@@ -509,8 +523,6 @@ vnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 
-
-
 " defines a `leader key` for custom shortcuts
 let mapleader=" "
 
@@ -534,11 +546,7 @@ nmap <leader>hs <Plug>GitGutterStageHunk
 nmap <leader>hu <Plug>GitGutterUndoHunk
 
 
-
-
 map ; :Files<CR>
-
-
 
 
 " Remove newbie crutches in Command Mode
