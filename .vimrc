@@ -126,7 +126,7 @@ set nowrap                  " no wrapping of long lines
 set noswapfile
 set nobackup                " because undodir/undofile
 if has('persistent_undo')
-    set undodir=/home/chara/.vim/undodir
+    set undodir=~/.vim/undodir
     set undofile
     if !isdirectory(&undodir)
         call mkdir(&undodir, "p")
