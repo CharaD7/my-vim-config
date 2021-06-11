@@ -8,12 +8,12 @@
 " Avoid modifying this section, unless you are very sure of what you are doing
 
 let vim_plug_just_installed = 0
-let vim_plug_path = expand('/home/chara/.vim/autoload/plug.vim')
+let vim_plug_path = expand('~/.vim/autoload/plug.vim')
 if !filereadable(vim_plug_path)
     echo "Installing Vim-plug..."
     echo ""
-    silent !mkdir -p /home/chara/.vim/autoload
-    silent !curl -fLo /home/chara/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !mkdir -p ~/.vim/autoload
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     let vim_plug_just_installed = 1
 endif
 
@@ -46,7 +46,7 @@ autocmd FileType javascript let b:syntastic_javascript_jscs_args =
 " install plugins with :PlugInstall
 " clean unused plugins :PlugClean
 "
-call plug#begin('/home/chara/.vim/plugged')
+call plug#begin('~/.vim/plugged')
 
 Plug 'morhetz/gruvbox'      " color scheme
 Plug 'tpope/vim-fugitive'   " git integration
