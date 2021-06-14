@@ -8,7 +8,7 @@ Vim configuration with all recommended plugins and gruvbox theme
 Copy the .vimrc file, vim and .vim directories to your root directory and run the following:
 
 ```
-1. cd vim
+1. cd vim-files
     ./configure --with-features=huge \
                 --enable-multibyte \
                 --enable-rubyinterp \
@@ -28,15 +28,15 @@ _Note that the python3-config-dir given there is your python3 version directory.
 
 After compilation is done, move to this step
 
-2 ```make VIMRUNTIMEDIR=/usr/share/vim/vim82```
+2. ```make VIMRUNTIMEDIR=/usr/share/vim/vim82```
 
-3 ```sudo make install``` 
+3. ```sudo make install``` 
 
-4 ```cd ..```
+4. ```cd ..```
 
-5 ```vim .vimrc```
+5. ```vim .vimrc```
 
-6 Vim launches and tries to install the necessary plugins. If you do not see the installation, use **:PlugInstall** to get it started.
+6. Vim launches and tries to install the necessary plugins. If you do not see the installation, use **:PlugInstall** to get it started.
 
 
 
