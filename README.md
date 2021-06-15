@@ -52,7 +52,7 @@ You may have to run _apt-get install python-vim_
 
 3. Copy the content of the bonus folder to your root directory to replace your vim and bash configurations
 
-4. Run ```source .bzshrc``` and then run ```source .zshrc``` 
+4. Run ```source .bashrc``` and then run ```source .zshrc``` 
 
 5. If your fonts do not work well, copy the _.local_ folder to your root directory and source again.
 
