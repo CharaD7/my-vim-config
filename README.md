@@ -23,7 +23,7 @@ Copy the .vimrc file, vim and .vim directories to your root directory and run th
                 --enable-cscope \
                 --enable-multibyte \
                 --with-x \
-                --prefix=/usr
+                --prefix=/usr/share/vim/vim82
 ```
 _Note that the python3-config-dir given there is your python3 version directory. You can check it out by running ```ls /usr/lib/python3.9```_
 
