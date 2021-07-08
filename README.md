@@ -6,6 +6,7 @@ Vim configuration with all recommended plugins and gruvbox theme
 
 
 Copy the .vimrc file, vim and .vim directories to your root directory and run the following:
+
 1.```cd vim-files
     ./configure --with-features=huge \
                 --enable-multibyte \
