@@ -6,13 +6,12 @@ Vim configuration with all recommended plugins and gruvbox theme
 
 
 Copy the .vimrc file, vim and .vim directories to your root directory and run the following:
-
-```
-1. cd vim-files
+1.```cd vim-files
     ./configure --with-features=huge \
                 --enable-multibyte \
                 --enable-rubyinterp \
                 --enable-pythoninterp \
+                --enable-python3interp \
                 --with-python3-config-dir=/usr/lib/python3.9/config-3.9-x86_64-linux-gnu \
                 --enable-perlinterp \
                 --enable-luainterp \
