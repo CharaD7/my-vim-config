@@ -1,2 +1,2 @@
 # Ignore cache files to avoid conflicts and build fails on first build
-vim-files/src/auto.config.cache
+vim-files/src/auto.config.cache # acknowledgment to @supdrewin for spotting this
