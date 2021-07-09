@@ -23,9 +23,9 @@ CFLAGS		= -g -O2 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1
 CPPFLAGS	= 
 srcdir		= .
 
-LDFLAGS		= -L. -Wl,-z,relro -Wl,-z,now -fstack-protector -rdynamic -Wl,-export-dynamic  -L/usr/local/lib -Wl,--as-needed
-LIBS		= -lm -ltinfo  -lselinux  -ldl
-TAGPRG		= ctags
+LDFLAGS		= -L. -Wl,-z,relro -Wl,-z,now -fstack-protector-strong -rdynamic -Wl,-export-dynamic  -L/usr/local/lib -Wl,--as-needed
+LIBS		= -lm -ltinfo   -ldl
+TAGPRG		= ctags -I INIT+,INIT2+,INIT3+,INIT4+,INIT5+ --fields=+S
 
 CPP		= gcc -E
 CPP_MM		= M
@@ -34,7 +34,7 @@ LINK_AS_NEEDED	= yes
 X_CFLAGS	=  
 X_LIBS_DIR	=  
 X_PRE_LIBS	=  -lSM -lICE -lXpm
-X_EXTRA_LIBS	=  -lXdmcp -lSM -lICE
+X_EXTRA_LIBS	=  -lXdmcp -lSM -lICE -ldl
 X_LIBS		= -lXt -lX11
 
 LUA_LIBS	= 
@@ -52,8 +52,8 @@ MZSCHEME_EXTRA	=
 MZSCHEME_MZC	= 
 
 PERL		= /usr/bin/perl
-PERLLIB		= /usr/share/perl/5.28
-PERL_XSUBPP	= /usr/share/perl/5.28/ExtUtils/xsubpp
+PERLLIB		= /usr/share/perl/5.32
+PERL_XSUBPP	= /usr/share/perl/5.32/ExtUtils/xsubpp
 PERL_LIBS	= 
 SHRPENV		= 
 PERL_SRC	= 
@@ -61,15 +61,15 @@ PERL_OBJ	=
 PERL_PRO	= 
 PERL_CFLAGS	= 
 
-PYTHON_SRC	= if_python.c
-PYTHON_OBJ	= objects/if_python.o
-PYTHON_CFLAGS	= -I/usr/include/python2.7 -pthread -fPIE
-PYTHON_LIBS	= -L/usr/lib/python2.7/config-x86_64-linux-gnu -lpython2.7 -lpthread -ldl -lutil -lm -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions
+PYTHON_SRC	= 
+PYTHON_OBJ	= 
+PYTHON_CFLAGS	= 
+PYTHON_LIBS	= 
 
-PYTHON3_SRC	= 
-PYTHON3_OBJ	= 
-PYTHON3_CFLAGS	= 
-PYTHON3_LIBS	= 
+PYTHON3_SRC	= if_python3.c
+PYTHON3_OBJ	= objects/if_python3.o
+PYTHON3_CFLAGS	= -I/usr/include/python3.9 -pthread -fPIE
+PYTHON3_LIBS	= -L/usr/lib/python3.9/config-3.9-x86_64-linux-gnu -lpython3.9 -lcrypt -lpthread -ldl -lutil -lm -lm
 
 TCL		= 
 TCL_SRC		= 
@@ -90,10 +90,10 @@ RUBY		= /usr/bin/ruby
 RUBY_SRC	= if_ruby.c
 RUBY_OBJ	= objects/if_ruby.o
 RUBY_PRO	= if_ruby.pro
-RUBY_CFLAGS	= -I/usr/include/ruby-2.5.0 -I/usr/include/x86_64-linux-gnu/ruby-2.5.0 -DRUBY_VERSION=25
-RUBY_LIBS	= -lruby-2.5 -lpthread -lgmp -ldl -lcrypt -lm  -L/usr/lib
+RUBY_CFLAGS	= -I/usr/include/ruby-2.7.0 -I/usr/include/x86_64-linux-gnu/ruby-2.7.0 -DRUBY_VERSION=27
+RUBY_LIBS	= -lruby-2.7 -lm  -L/usr/lib
 
-AWK		= mawk
+AWK		= gawk
 
 STRIP		= strip
 
@@ -132,42 +132,42 @@ DATADIR		= ${datarootdir}
 MANDIR		= ${datarootdir}/man
 
 ### Do we have a GUI
-GUI_INC_LOC	= -pthread -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0 -I/usr/include/cairo -I/usr/include/libdrm -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/fribidi -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/uuid -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include
+GUI_INC_LOC	= 
 GUI_LIB_LOC	= 
-GUI_SRC		= $(GTK_SRC)
-GUI_OBJ		= $(GTK_OBJ)
-GUI_DEFS	= $(GTK_DEFS)
-GUI_IPATH	= $(GTK_IPATH)
-GUI_LIBS_DIR	= $(GTK_LIBS_DIR)
-GUI_LIBS1	= $(GTK_LIBS1)
-GUI_LIBS2	= $(GTK_LIBS2)
-GUI_INSTALL	= $(GTK_INSTALL)
-GUI_TARGETS	= $(GTK_TARGETS)
-GUI_MAN_TARGETS	= $(GTK_MAN_TARGETS)
-GUI_TESTTARGET	= $(GTK_TESTTARGET)
-GUI_TESTARG	= $(GTK_TESTARG)
-GUI_BUNDLE	= $(GTK_BUNDLE)
+GUI_SRC		= $(ATHENA_SRC)
+GUI_OBJ		= $(ATHENA_OBJ)
+GUI_DEFS	= $(ATHENA_DEFS)
+GUI_IPATH	= $(ATHENA_IPATH)
+GUI_LIBS_DIR	= $(ATHENA_LIBS_DIR)
+GUI_LIBS1	= $(ATHENA_LIBS1)
+GUI_LIBS2	= $(ATHENA_LIBS2)
+GUI_INSTALL	= $(ATHENA_INSTALL)
+GUI_TARGETS	= $(ATHENA_TARGETS)
+GUI_MAN_TARGETS	= $(ATHENA_MAN_TARGETS)
+GUI_TESTTARGET	= $(ATHENA_TESTTARGET)
+GUI_TESTARG	= $(ATHENA_TESTARG)
+GUI_BUNDLE	= $(ATHENA_BUNDLE)
 NARROW_PROTO	= 
-GUI_X_LIBS	= 
+GUI_X_LIBS	= -lXmu -lXext
 MOTIF_LIBNAME	= 
-GTK_LIBNAME	= -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0
+GTK_LIBNAME	= 
 
-GLIB_COMPILE_RESOURCES = /usr/bin/glib-compile-resources
-GRESOURCE_SRC = auto/gui_gtk_gresources.c
-GRESOURCE_OBJ = objects/gui_gtk_gresources.o
+GLIB_COMPILE_RESOURCES = 
+GRESOURCE_SRC = 
+GRESOURCE_OBJ = 
 
-GTK_UPDATE_ICON_CACHE = /usr/bin/gtk-update-icon-cache
-UPDATE_DESKTOP_DATABASE = no
+GTK_UPDATE_ICON_CACHE = 
+UPDATE_DESKTOP_DATABASE = 
 
 ### Any OS dependent extra source and object file
 OS_EXTRA_SRC	= 
 OS_EXTRA_OBJ	= 
 
 ### If the *.po files are to be translated to *.mo files.
-MAKEMO		= yes
+MAKEMO		= 
 
-MSGFMT		= msgfmt
-MSGFMT_DESKTOP	= gvim.desktop vim.desktop
+MSGFMT		= 
+MSGFMT_DESKTOP	= 
 
 ### set if $SOURCE_DATE_EPOCH was set when running configure
 BUILD_DATE_MSG	= 

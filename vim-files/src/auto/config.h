@@ -186,7 +186,7 @@
 #define HAVE_READLINK 1
 #define HAVE_RENAME 1
 #define HAVE_SELECT 1
-#define HAVE_SELINUX 1
+/* #undef HAVE_SELINUX */
 #define HAVE_SETENV 1
 #define HAVE_SETPGID 1
 #define HAVE_SETSID 1
@@ -223,7 +223,7 @@
 #define HAVE_UNSETENV 1
 #define HAVE_USLEEP 1
 #define HAVE_UTIME 1
-#define HAVE_BIND_TEXTDOMAIN_CODESET 1
+/* #undef HAVE_BIND_TEXTDOMAIN_CODESET */
 #define HAVE_MBLEN 1
 
 /* Define, if needed, for accessing large files. */
@@ -255,7 +255,7 @@
 #define HAVE_SGTTY_H 1
 #define HAVE_STDINT_H 1
 #define HAVE_STRINGS_H 1
-#define HAVE_STROPTS_H 1
+/* #undef HAVE_STROPTS_H */
 /* #undef HAVE_SYS_ACCESS_H */
 /* #undef HAVE_SYS_ACL_H */
 /* #undef HAVE_SYS_DIR_H */
@@ -293,7 +293,7 @@
 /* #undef HAVE_XM_JOINSIDET_H */
 /* #undef HAVE_XM_NOTEBOOK_H */
 #define HAVE_X11_XPM_H 1
-/* #undef HAVE_X11_XMU_EDITRES_H */
+#define HAVE_X11_XMU_EDITRES_H 1
 #define HAVE_X11_SM_SMLIB_H 1
 
 /* Define to the type of the XpmAttributes type. */
@@ -347,10 +347,10 @@
 /* #undef DYNAMIC_PERL */
 
 /* Define if you want to include the Python interpreter. */
-#define FEAT_PYTHON 1
+/* #undef FEAT_PYTHON */
 
 /* Define if you want to include the Python3 interpreter. */
-/* #undef FEAT_PYTHON3 */
+#define FEAT_PYTHON3 1
 
 /* Define for linking via dlopen() or LoadLibrary() */
 /* #undef DYNAMIC_PYTHON */
@@ -383,7 +383,7 @@
 /* #undef HAVE_AIX_ACL */
 
 /* Define if pango_shape_full() is available. */
-#define HAVE_PANGO_SHAPE_FULL 1
+/* #undef HAVE_PANGO_SHAPE_FULL */
 
 /* Define if you want to add support of GPM (Linux console mouse daemon) */
 /* #undef HAVE_GPM */
@@ -422,10 +422,10 @@
 #define HAVE_DLFCN_H 1
 
 /* Define if there is a working gettext(). */
-#define HAVE_GETTEXT 1
+/* #undef HAVE_GETTEXT */
 
 /* Define if _nl_msg_cat_cntr is present. */
-#define HAVE_NL_MSG_CAT_CNTR 1
+/* #undef HAVE_NL_MSG_CAT_CNTR */
 
 /* Define if we have dlopen() */
 #define HAVE_DLOPEN 1
@@ -479,10 +479,10 @@
 #define HAVE_XUTF8SETWMPROPERTIES 1
 
 /* Define if GResource is used to load icons */
-#define USE_GRESOURCE 1
+/* #undef USE_GRESOURCE */
 
 /* Define if GTK+ GUI is to be linked against GTK+ 3 */
-#define USE_GTK3 1
+/* #undef USE_GTK3 */
 
 /* Define if we have isinf() */
 #define HAVE_ISINF 1

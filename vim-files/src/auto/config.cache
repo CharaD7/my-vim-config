@@ -37,7 +37,6 @@ ac_cv_env_host_alias_set=
 ac_cv_env_host_alias_value=
 ac_cv_env_target_alias_set=
 ac_cv_env_target_alias_value=
-ac_cv_func_bind_textdomain_codeset=${ac_cv_func_bind_textdomain_codeset=yes}
 ac_cv_func_connect=${ac_cv_func_connect=yes}
 ac_cv_func_fchdir=${ac_cv_func_fchdir=yes}
 ac_cv_func_fchmod=${ac_cv_func_fchmod=yes}
@@ -122,7 +121,6 @@ ac_cv_header_math_h=${ac_cv_header_math_h=yes}
 ac_cv_header_memory_h=${ac_cv_header_memory_h=yes}
 ac_cv_header_poll_h=${ac_cv_header_poll_h=yes}
 ac_cv_header_pwd_h=${ac_cv_header_pwd_h=yes}
-ac_cv_header_selinux_selinux_h=${ac_cv_header_selinux_selinux_h=yes}
 ac_cv_header_setjmp_h=${ac_cv_header_setjmp_h=yes}
 ac_cv_header_sgtty_h=${ac_cv_header_sgtty_h=yes}
 ac_cv_header_stdc=${ac_cv_header_stdc=yes}
@@ -130,7 +128,7 @@ ac_cv_header_stdint_h=${ac_cv_header_stdint_h=yes}
 ac_cv_header_stdlib_h=${ac_cv_header_stdlib_h=yes}
 ac_cv_header_string_h=${ac_cv_header_string_h=yes}
 ac_cv_header_strings_h=${ac_cv_header_strings_h=yes}
-ac_cv_header_stropts_h=${ac_cv_header_stropts_h=yes}
+ac_cv_header_stropts_h=${ac_cv_header_stropts_h=no}
 ac_cv_header_sys_access_h=${ac_cv_header_sys_access_h=no}
 ac_cv_header_sys_acl_h=${ac_cv_header_sys_acl_h=no}
 ac_cv_header_sys_ioctl_h=${ac_cv_header_sys_ioctl_h=yes}
@@ -164,31 +162,32 @@ ac_cv_header_wctype_h=${ac_cv_header_wctype_h=yes}
 ac_cv_lib_ICE_IceConnectionNumber=${ac_cv_lib_ICE_IceConnectionNumber=yes}
 ac_cv_lib_ICE_IceOpenConnection=${ac_cv_lib_ICE_IceOpenConnection=yes}
 ac_cv_lib_Xdmcp__XdmcpAuthDoIt=${ac_cv_lib_Xdmcp__XdmcpAuthDoIt=yes}
+ac_cv_lib_Xext_XShapeQueryExtension=${ac_cv_lib_Xext_XShapeQueryExtension=yes}
+ac_cv_lib_Xmu_XmuCreateStippledPixmap=${ac_cv_lib_Xmu_XmuCreateStippledPixmap=yes}
 ac_cv_lib_Xpm_XpmCreatePixmapFromData=${ac_cv_lib_Xpm_XpmCreatePixmapFromData=yes}
 ac_cv_lib_acl_acl_get_file=${ac_cv_lib_acl_acl_get_file=no}
+ac_cv_lib_dl_dlsym=${ac_cv_lib_dl_dlsym=yes}
 ac_cv_lib_elf_main=${ac_cv_lib_elf_main=no}
 ac_cv_lib_m_strtod=${ac_cv_lib_m_strtod=yes}
 ac_cv_lib_posix1e_acl_get_file=${ac_cv_lib_posix1e_acl_get_file=no}
 ac_cv_lib_sec_acl_get=${ac_cv_lib_sec_acl_get=no}
-ac_cv_lib_selinux_is_selinux_enabled=${ac_cv_lib_selinux_is_selinux_enabled=yes}
+ac_cv_lib_selinux_is_selinux_enabled=${ac_cv_lib_selinux_is_selinux_enabled=no}
 ac_cv_lib_socket_socket=${ac_cv_lib_socket_socket=no}
 ac_cv_lib_tinfo___tgetent=${ac_cv_lib_tinfo___tgetent=yes}
+ac_cv_lib_w_wslen=${ac_cv_lib_w_wslen=no}
 ac_cv_lib_xpg4__xpg4_setrunelocale=${ac_cv_lib_xpg4__xpg4_setrunelocale=no}
 ac_cv_objext=${ac_cv_objext=o}
-ac_cv_path_EGREP=${ac_cv_path_EGREP='/bin/grep -E'}
-ac_cv_path_FGREP=${ac_cv_path_FGREP='/bin/grep -F'}
-ac_cv_path_GLIB_COMPILE_RESOURCES=${ac_cv_path_GLIB_COMPILE_RESOURCES=/usr/bin/glib-compile-resources}
-ac_cv_path_GREP=${ac_cv_path_GREP=/bin/grep}
-ac_cv_path_GTK_UPDATE_ICON_CACHE=${ac_cv_path_GTK_UPDATE_ICON_CACHE=/usr/bin/gtk-update-icon-cache}
-ac_cv_path_UPDATE_DESKTOP_DATABASE=${ac_cv_path_UPDATE_DESKTOP_DATABASE=no}
+ac_cv_path_EGREP=${ac_cv_path_EGREP='/usr/bin/grep -E'}
+ac_cv_path_FGREP=${ac_cv_path_FGREP='/usr/bin/grep -F'}
+ac_cv_path_GREP=${ac_cv_path_GREP=/usr/bin/grep}
 ac_cv_path_ac_pt_PKG_CONFIG=${ac_cv_path_ac_pt_PKG_CONFIG=/usr/bin/pkg-config}
 ac_cv_path_vi_cv_path_perl=${ac_cv_path_vi_cv_path_perl=/usr/bin/perl}
 ac_cv_path_vi_cv_path_plain_lua=${ac_cv_path_vi_cv_path_plain_lua=/usr/bin/lua}
+ac_cv_path_vi_cv_path_python3=${ac_cv_path_vi_cv_path_python3=/usr/bin/python3}
 ac_cv_path_vi_cv_path_python=${ac_cv_path_vi_cv_path_python=/usr/bin/python2}
 ac_cv_path_vi_cv_path_ruby=${ac_cv_path_vi_cv_path_ruby=/usr/bin/ruby}
-ac_cv_prog_AWK=${ac_cv_prog_AWK=mawk}
+ac_cv_prog_AWK=${ac_cv_prog_AWK=gawk}
 ac_cv_prog_CPP=${ac_cv_prog_CPP='gcc -E'}
-ac_cv_prog_MSGFMT=${ac_cv_prog_MSGFMT=msgfmt}
 ac_cv_prog_STRIP=${ac_cv_prog_STRIP=strip}
 ac_cv_prog_ac_ct_CC=${ac_cv_prog_ac_ct_CC=gcc}
 ac_cv_prog_cc_c89=${ac_cv_prog_cc_c89=}
@@ -219,26 +218,33 @@ ac_cv_type_stack_t=${ac_cv_type_stack_t=yes}
 ac_cv_type_uid_t=${ac_cv_type_uid_t=yes}
 ac_cv_type_unsigned_long_long_int=${ac_cv_type_unsigned_long_long_int=yes}
 cf_cv_ebcdic=${cf_cv_ebcdic=no}
-vi_cv_dll_name_python=${vi_cv_dll_name_python=libpython2.7.so.1.0}
+vi_cv_dll_name_python3=${vi_cv_dll_name_python3=libpython3.9.so.1.0}
 vi_cv_have_gpm=${vi_cv_have_gpm=no}
 vi_cv_have_sysmouse=${vi_cv_have_sysmouse=no}
 vi_cv_path_lua=${vi_cv_path_lua=/usr/bin/lua}
 vi_cv_path_lua_pfx=${vi_cv_path_lua_pfx=}
 vi_cv_path_perl=${vi_cv_path_perl=/usr/bin/perl}
 vi_cv_path_plain_lua=${vi_cv_path_plain_lua=/usr/bin/lua}
+vi_cv_path_python3=${vi_cv_path_python3=/usr/bin/python3}
+vi_cv_path_python3_conf=${vi_cv_path_python3_conf=/usr/lib/python3.9/config-3.9-x86_64-linux-gnu}
+vi_cv_path_python3_epfx=${vi_cv_path_python3_epfx=/usr}
+vi_cv_path_python3_pfx=${vi_cv_path_python3_pfx=/usr}
+vi_cv_path_python3_plibs=${vi_cv_path_python3_plibs='-L/usr/lib/python3.9/config-3.9-x86_64-linux-gnu -lpython3.9 -lcrypt -lpthread -ldl -lutil -lm -lm'}
+vi_cv_path_python3path=${vi_cv_path_python3path=:/usr/lib/python39.zip:/usr/lib/python3.9:/usr/lib/python3.9/lib-dynload:/home/jija/.local/lib/python3.9/site-packages:/usr/local/lib/python3.9/dist-packages:/usr/lib/python3/dist-packages:/usr/lib/python3.9/dist-packages}
 vi_cv_path_python=${vi_cv_path_python=/usr/bin/python2}
-vi_cv_path_python_conf=${vi_cv_path_python_conf=/usr/lib/python2.7/config-x86_64-linux-gnu}
+vi_cv_path_python_conf=${vi_cv_path_python_conf=}
 vi_cv_path_python_epfx=${vi_cv_path_python_epfx=/usr}
 vi_cv_path_python_pfx=${vi_cv_path_python_pfx=/usr}
-vi_cv_path_python_plibs=${vi_cv_path_python_plibs='-L/usr/lib/python2.7/config-x86_64-linux-gnu -lpython2.7 -lpthread -ldl -lutil -lm -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions'}
-vi_cv_path_pythonpath=${vi_cv_path_pythonpath=:/usr/lib/python2.7:/usr/lib/python2.7/plat-x86_64-linux-gnu:/usr/lib/python2.7/lib-tk:/usr/lib/python2.7/lib-old:/usr/lib/python2.7/lib-dynload:/home/chara/.local/lib/python2.7/site-packages:/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/dist-packages/powerline_shell-0.7.0-py2.7.egg:/usr/lib/python2.7/dist-packages}
+vi_cv_path_pythonpath=${vi_cv_path_pythonpath=:/usr/share/offsec-awae-wheels/beautifulsoup4-4.9.1-py2-none-any.whl:/usr/share/offsec-awae-wheels/backports.functools_lru_cache-1.6.1-py2.py3-none-any.whl:/usr/share/offsec-awae-wheels/soupsieve-1.9.5-py2.py3-none-any.whl:/usr/share/offsec-awae-wheels/urllib3-1.25.9-py2.py3-none-any.whl:/usr/share/offsec-awae-wheels/pyOpenSSL-19.1.0-py2.py3-none-any.whl:/usr/share/offsec-awae-wheels/colorama-0.4.3-py2.py3-none-any.whl:/usr/share/offsec-awae-wheels/certifi-2020.4.5.1-py2.py3-none-any.whl:/usr/share/offsec-awae-wheels/PySocks-1.7.1-py27-none-any.whl:/usr/share/offsec-awae-wheels/six-1.15.0-py2.py3-none-any.whl:/usr/share/offsec-awae-wheels/enum34-1.1.10-py2-none-any.whl:/usr/share/offsec-awae-wheels/requests-2.23.0-py2.py3-none-any.whl:/usr/share/offsec-awae-wheels/chardet-3.0.4-py2.py3-none-any.whl:/usr/share/offsec-awae-wheels/pycparser-2.20-py2.py3-none-any.whl:/usr/share/offsec-awae-wheels/idna-2.9-py2.py3-none-any.whl:/usr/share/offsec-awae-wheels/ipaddress-1.0.23-py2.py3-none-any.whl:/usr/share/offsec-awae-wheels/ply-3.11-py2.py3-none-any.whl:/usr/share/cffi-wheels/setuptools-44.1.0-py2.py3-none-any.whl:/usr/share/cffi-wheels/py-1.8.1-py2.py3-none-any.whl:/usr/lib/python2.7:/usr/lib/python2.7/plat-x86_64-linux-gnu:/usr/lib/python2.7/lib-tk:/usr/lib/python2.7/lib-old:/usr/lib/python2.7/lib-dynload:/usr/local/lib/python2.7/dist-packages:/usr/lib/python2.7/dist-packages:/usr/lib/python2.7/dist-packages}
 vi_cv_path_ruby=${vi_cv_path_ruby=/usr/bin/ruby}
 vi_cv_perl_extutils=${vi_cv_perl_extutils=unknown_perl_extutils_path}
-vi_cv_perl_xsubpp=${vi_cv_perl_xsubpp=/usr/share/perl/5.28/ExtUtils/xsubpp}
-vi_cv_perllib=${vi_cv_perllib=/usr/share/perl/5.28}
+vi_cv_perl_xsubpp=${vi_cv_perl_xsubpp=/usr/share/perl/5.32/ExtUtils/xsubpp}
+vi_cv_perllib=${vi_cv_perllib=/usr/share/perl/5.32}
+vi_cv_var_python3_abiflags=${vi_cv_var_python3_abiflags=}
+vi_cv_var_python3_version=${vi_cv_var_python3_version=3.9}
 vi_cv_var_python_version=${vi_cv_var_python_version=2.7}
-vi_cv_version_lua=${vi_cv_version_lua=5.3}
-vi_cv_version_plain_lua=${vi_cv_version_plain_lua=5.3}
+vi_cv_version_lua=${vi_cv_version_lua=5.1}
+vi_cv_version_plain_lua=${vi_cv_version_plain_lua=5.1}
 vi_cv_with_luajit=${vi_cv_with_luajit=no}
 vim_cv_getcwd_broken=${vim_cv_getcwd_broken=no}
 vim_cv_ipv6_networking=${vim_cv_ipv6_networking=yes}
