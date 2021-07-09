@@ -280,8 +280,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>F  <Plug>(coc-format-selected)
-nmap <leader>F  <Plug>(coc-format-selected)
+xmap <leader>FT  <Plug>(coc-format-selected)
+nmap <leader>FT  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -556,7 +556,7 @@ let g:syntastic_always_populate_loc_list = 1
 map <C-e> :NERDTreeToggle<CR>
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-t> :NERDTree<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+nnoremap <S-f> :NERDTreeFind<CR>
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
 " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
@@ -656,6 +656,7 @@ let g:indentLine_char = '\u206'
 " Keybindings {
   " Save file
   nnoremap <Leader>w :w<CR>
+  vnoremap <Leader>w :w<CR>
   "Copy and paste from system clipboard
   vmap <Leader>y "+y
   vmap <Leader>d "+d
