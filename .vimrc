@@ -67,6 +67,8 @@ Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
+" nvim v0.5.0
+Plug 'kdheepak/lazygit.nvim'
 " Use release branch (recommend)
 Plug 'yggdroot/indentline'
 Plug 'tpope/vim-unimpaired'
@@ -510,7 +512,21 @@ endfunction
 " autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 
+" Configuration for lazygit
+let g:lazygit_floating_window_winblend = 0 " transparency of floating window
+let g:lazygit_floating_window_scaling_factor = 0.9 " scaling factor for floating window
+let g:lazygit_floating_window_corner_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
+let g:lazygit_floating_window_use_plenary = 0 " use plenary.nvim to manage floating window if available
+let g:lazygit_use_neovim_remote = 1 " fallback to 0 if neovim-remote is not installed
 
+" setup mapping to call :LazyGit to load up the configuration right from vim,
+" run :LazyGitConfig<CR>
+nnoremap <silent> <leader>gg :LazyGit<CR>
+
+" Making use of neovim-remote for lazygit comment editor instance in vim
+if has('nvim') && executable('nvr')
+  let $GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
+endif
 
 
 autocmd FileType apache set commentstring=#\ %s
