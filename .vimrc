@@ -162,7 +162,7 @@ set scrolloff=3
 set background=dark
 
 " use 256 colors when possible
-if has('gui_running') || (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256')
+if has('gui_running') || (&term =~? 'mlterm\|fbterm\|xterm\|xterm-256\|screen-256')
     if !has('gui_running')
         let &t_Co = 256
     endif
