@@ -1,8 +1,4 @@
 " .vimrc
-" from
-"  https://github.com/erkrnt/awesome-streamerrc/blob/master/ThePrimeagen/.vimrc
-"  http://vim.fisadev.com
-
 " ============================================================================
 " Vim-plug initialization
 " Avoid modifying this section, unless you are very sure of what you are doing
@@ -57,6 +53,12 @@ Plug 'dense-analysis/ale'
 Plug 'zxqfl/tabnine-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
+" Trying to use telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+" Config to support C#
+Plug 'OmniSharp/omnisharp-vim'
+"--------------------------------------------------------------"
 Plug 'frazrepo/vim-rainbow'
 Plug 'chrisbra/vim-commentary'
 Plug 'vim-scripts/vim-gitgutter'
@@ -172,7 +174,6 @@ else
     colorscheme delek       "tres moche
 endif
 
-
 set cursorline              " highlight the line of the cursor
 " if exists("&colorcolumn")
 " set colorcolumn=120          " highlight column #80
@@ -204,25 +205,7 @@ let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
 let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
 
 
-" FZF preview mappings
-nmap <Leader>f [fzf-p]
-xmap <Leader>f [fzf-p]
 
-nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResourcesRpc project_mru git<CR>
-nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatusRpc<CR>
-nnoremap <silent> [fzf-p]ga    :<C-u>FzfPreviewGitActionsRpc<CR>
-nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffersRpc<CR>
-nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffersRpc<CR>
-nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResourcesRpc buffer project_mru<CR>
-nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumpsRpc<CR>
-nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChangesRpc<CR>
-nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
-nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
-nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrepRpc<Space>
-xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrepRpc<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
-nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTagsRpc<CR>
-nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFixRpc<CR>
-nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationListRpc<CR>
 
 
 " Use tab for trigger completion with characters ahead and navigate.
@@ -264,7 +247,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-
+inoremap <silent><expr> <c-space> coc#refresh()
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -382,6 +365,11 @@ xnoremap          [fzf-p]gr    "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F
 nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
 nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
 nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
+
+let g:LanguageClient_serverCommands = {
+    \ 'vue': ['vls']
+    \ }
+
 
 " floating window size ratio
 let g:fzf_preview_floating_window_rate = 0.9
@@ -517,7 +505,7 @@ let g:lazygit_floating_window_winblend = 0 " transparency of floating window
 let g:lazygit_floating_window_scaling_factor = 0.9 " scaling factor for floating window
 let g:lazygit_floating_window_corner_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
 let g:lazygit_floating_window_use_plenary = 0 " use plenary.nvim to manage floating window if available
-let g:lazygit_use_neovim_remote = 1 " fallback to 0 if neovim-remote is not installed
+let g:lazygit_use_neovim_remote = 0 " fallback to 0 as neovim-remote is not installed
 
 " setup mapping to call :LazyGit to load up the configuration right from vim,
 " run :LazyGitConfig<CR>
@@ -535,12 +523,12 @@ autocmd FileType apache set commentstring=#\ %s
 let g:user_emmet_mode='a'    "enable all function in all mode.
 let g:user_emmet_leader_key='<C-N>'
 
- " Sets a status line. If in a Git repository, shows the current branch.
-  " Also shows the current file name, line and column number.
-  if has('statusline')
+" Sets a status line. If in a Git repository, shows the current branch.
+" Also shows the current file name, line and column number.
+if has('statusline')
     set laststatus=2
 
-   " Broken down into easily includeable segments
+    " Broken down into easily includeable segments
     set statusline=%<%f\                     " Filename
     set statusline+=%w%h%m%r                 " Options
     set statusline+=%{fugitive#statusline()} " Git Hotness
@@ -548,11 +536,11 @@ let g:user_emmet_leader_key='<C-N>'
     set statusline+=\ [%{getcwd()}]          " Current dir
     set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 
-   " Settings for vim syntastic
+    " Settings for vim syntastic
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
     set statusline+=%*
-  endif
+endif
 " }
 
 let g:syntastic_always_populate_loc_list = 1
@@ -575,9 +563,6 @@ nnoremap <C-t> :NERDTree<CR>
 nnoremap <S-f> :NERDTreeFind<CR>
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
-" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-            \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
 " Registering lightline components
 let g:lightline = {}
@@ -615,48 +600,47 @@ let g:lightline#ale#indicator_ok = "\uf00c"
 
 
 " Plugin Settings {
-  " Airline {
-    if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-    endif
+" Airline {
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
 
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#buffer_idx_mode = 1
-    let g:airline#extensions#tabline#fnamemod = ':t'
-    let g:airline#extensions#tabline#left_sep = ''
-    let g:airline#extensions#tabline#left_alt_sep = ''
-    let g:airline#extensions#tabline#right_sep = ''
-    let g:airline#extensions#tabline#right_alt_sep = ''
-    let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
+let g:airline#extensions#tabline#formatter = 'default'
 
-    " unicode symbols
-    let g:airline_left_sep = '»'
-    let g:airline_left_sep = '▶'
-    let g:airline_right_sep = '«'
-    let g:airline_right_sep = '◀'
-    let g:airline_symbols.crypt = '🔒'
-    let g:airline_symbols.linenr = '␊'
-    let g:airline_symbols.linenr = '␤'
-    let g:airline_symbols.linenr = '¶'
-    let g:airline_symbols.maxlinenr = '☰'
-    let g:airline_symbols.maxlinenr = ''
-    let g:airline_symbols.branch = '⎇'
-    let g:airline_symbols.paste = 'ρ'
-    let g:airline_symbols.paste = 'Þ'
-    let g:airline_symbols.paste = '∥'
-    let g:airline_symbols.spell = 'Ꞩ'
-    let g:airline_symbols.notexists = '∄'
-    let g:airline_symbols.whitespace = 'Ξ'
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
 
-    " Theme ( github.com/vim-airline/vim-airline-themes
-    let g:airline_theme= 'gruvbox'
-  " }
-
-" Experimental {
-  " Search and Replace
-  nmap <Leader>s :%s//g<Left><Left>
+" Theme ( github.com/vim-airline/vim-airline-themes
+let g:airline_theme= 'gruvbox'
 " }
 
+" Experimental {
+" Search and Replace
+nmap <Leader>s :%s//g<Left><Left>
+" }
 
 
 " Customizing Indentlines
@@ -668,35 +652,108 @@ let g:indentLine_conceallevel = 2
 let g:indentLine_enabled = 1
 let g:indentLine_char = '\u206'
 
+" Use the stdio version of OmniSharp-roslyn - this is the default
+let g:OmniSharp_server_stdio = 1
+let g:OmniSharp_selector_ui = 'fzf'    " Use fzf
+let g:OmniSharp_selector_findusages = 'fzf'
+" let g:OmniSharp_popup_mappings.close = '<Esc>'
+" Configuring popup options
+let g:OmniSharp_popup_options = {
+\ 'highlight': 'Normal',
+\ 'padding': [1],
+\ 'border': [1]
+\}
+
+if has('patch-8.1.1880')
+  set completeopt=longest,menuone,popuphidden
+  " Highlight the completion documentation popup background/foreground the same as
+  " the completion menu itself, for better readability with highlighted
+  " documentation.
+  set completepopup=highlight:Pmenu,border:off
+else
+  set completeopt=longest,menuone,preview
+  " Set desired preview window height for viewing documentation.
+  set previewheight=5
+endif
+
+" Tell ALE to use OmniSharp for linting C# files, and no other linters.
+let g:ale_linters = { 'cs': ['OmniSharp'] }
+
+augroup omnisharp_commands
+  autocmd!
+
+  " Show type information automatically when the cursor stops moving.
+  " Note that the type is echoed to the Vim command line, and will overwrite
+  " any other messages in this space including e.g. ALE linting messages.
+  autocmd CursorHold *.cs OmniSharpTypeLookup
+
+  " The following commands are contextual, based on the cursor position.
+  autocmd FileType cs nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osfu <Plug>(omnisharp_find_usages)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osfi <Plug>(omnisharp_find_implementations)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>ospd <Plug>(omnisharp_preview_definition)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>ospi <Plug>(omnisharp_preview_implementations)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>ost <Plug>(omnisharp_type_lookup)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osd <Plug>(omnisharp_documentation)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osfs <Plug>(omnisharp_find_symbol)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osfx <Plug>(omnisharp_fix_usings)
+  autocmd FileType cs nmap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
+  autocmd FileType cs imap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
+
+  " Navigate up and down by method/property/field
+  autocmd FileType cs nmap <silent> <buffer> [[ <Plug>(omnisharp_navigate_up)
+  autocmd FileType cs nmap <silent> <buffer> ]] <Plug>(omnisharp_navigate_down)
+  " Find all code errors/warnings for the current solution and populate the quickfix window
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osgcc <Plug>(omnisharp_global_code_check)
+  " Contextual code actions (uses fzf, vim-clap, CtrlP or unite.vim selector when available)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osca <Plug>(omnisharp_code_actions)
+  autocmd FileType cs xmap <silent> <buffer> <Leader>osca <Plug>(omnisharp_code_actions)
+  " Repeat the last code action performed (does not use a selector)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>os. <Plug>(omnisharp_code_action_repeat)
+  autocmd FileType cs xmap <silent> <buffer> <Leader>os. <Plug>(omnisharp_code_action_repeat)
+
+  autocmd FileType cs nmap <silent> <buffer> <Leader>os= <Plug>(omnisharp_code_format)
+
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osnm <Plug>(omnisharp_rename)
+
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osre <Plug>(omnisharp_restart_server)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>osst <Plug>(omnisharp_start_server)
+  autocmd FileType cs nmap <silent> <buffer> <Leader>ossp <Plug>(omnisharp_stop_server)
+augroup END
+
+" Enable snippet completion, using the ultisnips plugin
+" let g:OmniSharp_want_snippet=1
+
+
+
 
 " Keybindings {
-  " Save file
-  nnoremap <Leader>w :w<CR>
-  vnoremap <Leader>w :w<CR>
-  "Copy and paste from system clipboard
-  vmap <Leader>y "+y
-  vmap <Leader>d "+d
-  nmap <Leader>p "+p
-  nmap <Leader>P "+P
-  vmap <Leader>p "+p
-  vmap <Leader>P "+P
+" Save file
+nnoremap <leader>w :w<CR>
+"Copy and paste from system clipboard
+vmap <leader>y "+y
+vmap <leader>d "+d
+nmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>p "+p
+vmap <leader>P "+P
 
 
 "Use this variable to change symbols.
 
 "vim
 let g:NERDTreeGitStatusIndicatorMapCustom = {
-                \ 'Modified'  :'✹',
-                \ 'Staged'    :'✚',
-                \ 'Untracked' :'✭',
-                \ 'Renamed'   :'➜',
-                \ 'Unmerged'  :'═',
-                \ 'Deleted'   :'✖',
-                \ 'Dirty'     :'✗',
-                \ 'Ignored'   :'☒',
-                \ 'Clean'     :'✔︎',
-                \ 'Unknown'   :'?',
-                \ }
+    \ 'Modified'  :'✹',
+    \ 'Staged'    :'✚',
+    \ 'Untracked' :'✭',
+    \ 'Renamed'   :'➜',
+    \ 'Unmerged'  :'═',
+    \ 'Deleted'   :'✖',
+    \ 'Dirty'     :'✗',
+    \ 'Ignored'   :'☒',
+    \ 'Clean'     :'✔︎',
+    \ 'Unknown'   :'?',
+    \ }
 let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
 let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
 let g:NERDTreeGitStatusUntrackedFilesMode = 'all' " a heavy feature too. default: normal
@@ -827,25 +884,25 @@ let g:ycm_autoclose_preview_window_after_completion = 0
 
 
  " Remove newbie crutches in Command Mode
-cnoremap <Down> <Nop>
-cnoremap <Left> <Nop>
-cnoremap <Right> <Nop>
-cnoremap <Up> <Nop>
+" cnoremap <Down> <Nop>
+" cnoremap <Left> <Nop>
+" cnoremap <Right> <Nop>
+" cnoremap <Up> <Nop>
 
 " Remove newbie crutches in Insert Mode
-inoremap <Down> <Nop>
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
-inoremap <Up> <Nop>
+" inoremap <Down> <Nop>
+" inoremap <Left> <Nop>
+" inoremap <Right> <Nop>
+" inoremap <Up> <Nop>
 
 " Remove newbie crutches in Normal Mode
-nnoremap <Down> <Nop>
-nnoremap <Left> <Nop>
-nnoremap <Right> <Nop>
-nnoremap <Up> <Nop>
+" nnoremap <Down> <Nop>
+" nnoremap <Left> <Nop>
+" nnoremap <Right> <Nop>
+" nnoremap <Up> <Nop>
 
 " Remove newbie crutches in Visual Mode
-vnoremap <Down> <Nop>
-vnoremap <Left> <Nop>
-vnoremap <Right> <Nop>
-vnoremap <Up> <Nop>
+" vnoremap <Down> <Nop>
+" vnoremap <Left> <Nop>
+" vnoremap <Right> <Nop>
+" vnoremap <Up> <Nop>
