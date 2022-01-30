@@ -331,7 +331,6 @@ set iskeyword+=_,$,@,%,#
 " changes to a file and open a new file using :e, without being forced to write
 " or undo your changes first
 "set hidden
-"set nocompatible           " useless
 set title
 set visualbell
 set noerrorbells            " no sounds
@@ -354,6 +353,7 @@ set report=0
 set viminfo='1000,f1,:1000,/1000,<1000,s100
 " Swap directory to store temporary files
 set directory=$HOME/.vimfiles/swapfiles,/var/tmp,/tmp,.
+set nocompatible           " useless
 set history=1000
 set undolevels=1000
 set confirm
@@ -370,7 +370,7 @@ set nowrap                  " no wrapping of long lines
 " Width value of the Line Number Column
 set numberwidth=4
 set ruler
-
+set t_u7=
 " Shows matching brackets when text indicator is over them
 set showmatch
 set noswapfile
