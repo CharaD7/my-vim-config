@@ -290,7 +290,7 @@ Plug 'vim-airline/vim-airline-themes'
 "
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 ""}}}
-Plug 'frazrepo/vim-rainbow' : Rainbow parenthesis
+Plug 'frazrepo/vim-rainbow' " Rainbow parenthesis
 call plug#end()
 " -----------------------------------------------------------------------------
 
