@@ -31,268 +31,256 @@ endif
 " clean unused plugins :PlugClean
 "
 call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-projectionist' "{{{
-	" Provides granular project configuration using 'Projections'
-"}}}
+  Plug 'tpope/vim-projectionist' "{{{
+    " Provides granular project configuration using 'Projections'
+  "}}}
 
-Plug 'Valloric/ListToggle' "{{{
-	" Toggles the display of the QuickFix and the Location list
-	" Mappings:
-	" <leader>tl for toggling the Location List
-	" <leader>q for toggling the QuickFix
-"}}}
+  Plug 'Valloric/ListToggle' "{{{
+    " Toggles the display of the QuickFix and the Location list
+    " Mappings:
+    " <leader>tl for toggling the Location List
+    " <leader>q for toggling the QuickFix
+  "}}}
 
-Plug 'valloric/MatchTagAlways' "{{{
-" Always highlights the enclosing HTML/XML tags
-	let g:mta_filetypes = {
-				\ 'javascript.jsx' : 1,
-				\ 'erb' : 1
-				\}
-"}}}
+  Plug 'valloric/MatchTagAlways' "{{{
+  " Always highlights the enclosing HTML/XML tags
+    let g:mta_filetypes = {
+          \ 'javascript.jsx' : 1,
+          \ 'erb' : 1
+          \}
+  "}}}
 
-"------------------+
-" Navigation     {{{
-"------------------+
-Plug 'liuchengxu/vista.vim' "{{{
-	" Tag and LSP symbols viewer
-"}}}
+  " Navigation     {{{
+  "------------------+
+  Plug 'liuchengxu/vista.vim' "{{{
+    " Tag and LSP symbols viewer
+  "}}}
 
-Plug 'SirVer/ultisnips' "{{{
-	" The Ultimate snippet solution for Vim
-	let g:UltiSnipsExpandTrigger='<c-s>'
-	let g:UltiSnipsJumpForwardTrigger='<c-s>n'
-	let g:UltiSnipsJumpBackwardTrigger='<c-s>p'
-"}}}
+  Plug 'SirVer/ultisnips' "{{{
+    " The Ultimate snippet solution for Vim
+    let g:UltiSnipsExpandTrigger='<c-s>'
+    let g:UltiSnipsJumpForwardTrigger='<c-s>n'
+    let g:UltiSnipsJumpBackwardTrigger='<c-s>p'
+  "}}}
 
-Plug 'honza/vim-snippets' "{{{
-	" A community-maintained snippet repository for several languages and
-	" frameworks
-"}}}
+  Plug 'honza/vim-snippets' "{{{
+    " A community-maintained snippet repository for several languages and
+    " frameworks
+  "}}}
 
-Plug 'dsznajder/vscode-es7-javascript-react-snippets' "{{{
-" Snippets for react
-"}}}
+  Plug 'dsznajder/vscode-es7-javascript-react-snippets' "{{{
+  " Snippets for react
+  "}}}
 
-Plug 'epilande/vim-es2015-snippets' "{{{
-	" Snippets for ES2015
-"}}}
+  Plug 'epilande/vim-es2015-snippets' "{{{
+    " Snippets for ES2015
+  "}}}
 
-Plug 'epilande/vim-react-snippets' "{{{
-	" Snippets for React
-"}}}
-Plug 'lifepillar/vim-gruvbox8'      " color scheme
-Plug 'tpope/vim-fugitive'   " git integration
-Plug 'lyuts/vim-rtags'      " C++
-Plug 'mbbill/undotree'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'dense-analysis/ale' " for linting
-"{{{
-	" Provides real-time async linting
-	let g:ale_sign_column_always = 1
-	let g:ale_sign_error = '❗ '
-	let g:ale_sign_warning = '⚠️  '
-	let g:ale_set_highlights = 0
-	let g:ale_echo_msg_error_str = '❗'
-	let g:ale_echo_msg_warning_str = '⚠️ '
-	let g:ale_echo_msg_format = '[%linter%] %severity% %s'
+  Plug 'epilande/vim-react-snippets' "{{{
+    " Snippets for React
+  "}}}
+  Plug 'lifepillar/vim-gruvbox8'      " color scheme
+  Plug 'tpope/vim-fugitive'   " git integration
+  Plug 'lyuts/vim-rtags'      " C++
+  Plug 'mbbill/undotree'
+  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+  Plug 'dense-analysis/ale' " for linting
+  " Plug 'zxqfl/tabnine-vim'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
+  " Config to support C#
+  Plug 'OmniSharp/omnisharp-vim'
+  "--------------------------------------------------------------"
+  Plug 'frazrepo/vim-rainbow'
+  Plug 'tpope/vim-commentary'
+  Plug 'vim-scripts/vim-gitgutter'
+  Plug 'mattn/emmet-vim'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'doy/vim-foldtext' " folding
+  Plug 'alvan/vim-closetag'
+  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-projectionist'
+  Plug 'editorconfig/editorconfig-vim'
+  Plug 'scrooloose/syntastic'
+  Plug 'tpope/vim-surround'
 
-	let g:ale_fixers = {
-				\ '*': ['remove_trailing_lines', 'trim_whitespace'],
-				\ 'javascript': ['prettier', 'eslint'],
-				\ 'javascript.jsx': ['prettier', 'eslint'],
-				\ 'html': ['prettier'],
-				\ 'css': ['prettier'],
-				\ 'ruby': ['rubocop'],
-				\ 'typescript': ['ng lint --fix', 'prettier', 'eslint']
-	\}
-				" \ 'typescript': ['ng lint --fix', 'prettier', 'eslint'],
+  "   	FILE TYPES	            "
+  "-----------------------------"
+  Plug 'git@github.com:jelera/vim-javascript-syntax.git', { 'for': 'javascript' }
+  Plug 'leafgarland/typescript-vim' " TypeScript syntax
+  Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+  Plug 'jparise/vim-graphql'        " GraphQL syntax
+  Plug 'mattn/emmet-vim'
+  Plug 'othree/html5.vim'
+  Plug 'vim-python/python-syntax'
+  " MARKDOWN
+  Plug 'tpope/vim-markdown'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+  " Python ---------------{{{
+  Plug 'vim-python/python-syntax'
+      let g:python_highlight_all = 1
+  "}}}
+  " Use release branch (recommend)
+  Plug 'Yggdroot/indentLine' "{{{
+    " It displays the indentation level with thin vertical lines
+    let g:indentLine_char_list = ['┊']
+    let g:indentLine_enabled = 1
+  "}}}
+  Plug 'tpope/vim-unimpaired'
+  "------------------+
+  " Git {{{
+  "------------------+
+  Plug 'tpope/vim-fugitive' "{{{
+    " Provides a nice interface and extra commands for Git
+    augroup Fugitive
+      autocmd!
+      autocmd FileType fugitive setl nonumber
+      autocmd FileType gitcommit setl nonumber
+      autocmd FileType gitcommit setl spell
+      autocmd FileType gitcommit setl formatoptions+=tn formatoptions-=l
+      autocmd FileType gitcommit setl colorcolumn=72 textwidth=72
 
-	let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
-
-	let g:ale_linters = {
-				\ 'javascript': ['eslint'],
-				\ 'jsx' : ['eslint'],
-				\ 'ruby' : ['rubocop'],
-				\ 'typescript': ['ng lint', 'tsserver', 'eslint']
-	\}
-				" \ 'typescript': ['ng lint', 'tsserver', 'eslint'],
-	let g:ale_ruby_rubocop_executable = 'bundle'
-	let g:ale_lint_on_save = 1
-	let g:ale_fix_on_save = 1
-	"}}}
-" Plug 'zxqfl/tabnine-vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
-" Config to support C#
-Plug 'OmniSharp/omnisharp-vim'
-"--------------------------------------------------------------"
-Plug 'frazrepo/vim-rainbow'
-Plug 'tpope/vim-commentary'
-Plug 'vim-scripts/vim-gitgutter'
-Plug 'mattn/emmet-vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'doy/vim-foldtext' " folding
-Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-projectionist'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-surround'
-"-----------------------------"
-"   	FILE TYPES	      "
-"-----------------------------"
-Plug 'git@github.com:jelera/vim-javascript-syntax.git', { 'for': 'javascript' }
-Plug 'leafgarland/typescript-vim' " TypeScript syntax
-Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
-Plug 'jparise/vim-graphql'        " GraphQL syntax
-Plug 'mattn/emmet-vim'
-Plug 'othree/html5.vim'
-Plug 'vim-python/python-syntax'
-" MARKDOWN
-Plug 'tpope/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-" Python ---------------{{{
-Plug 'vim-python/python-syntax'
-		let g:python_highlight_all = 1
-"}}}
-" Use release branch (recommend)
-Plug 'Yggdroot/indentLine' "{{{
-	" It displays the indentation level with thin vertical lines
-	let g:indentLine_char_list = ['┊']
-	let g:indentLine_enabled = 1
-"}}}
-Plug 'tpope/vim-unimpaired'
-"------------------+
-" Git {{{
-"------------------+
-Plug 'tpope/vim-fugitive' "{{{
-	" Provides a nice interface and extra commands for Git
-	augroup Fugitive
-		autocmd!
-		autocmd FileType fugitive setl nonumber
-		autocmd FileType gitcommit setl nonumber
-		autocmd FileType gitcommit setl spell
-		autocmd FileType gitcommit setl formatoptions+=tn formatoptions-=l
-		autocmd FileType gitcommit setl colorcolumn=72 textwidth=72
-
-		if executable('par')
-			autocmd FileType gitcommit setl formatprg=par\ -w72
-		endif
-	augroup END
-"}}}
-
-Plug 'tpope/vim-rhubarb' "{{{
-	" Adds :Gbrowse for opening in Github
-"}}}
-
-Plug 'rhysd/committia.vim' "{{{
-	" Provides a more pleasant editing on Git commit messages
-"}}}
-
-Plug 'rhysd/git-messenger.vim'
-Plug 'rhysd/conflict-marker.vim'
-Plug 'knsh14/vim-github-link'
-
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'rhysd/github-complete.vim'
-    augroup config-github-complete
-        autocmd!
-        autocmd FileType gitcommit setl omnifunc=github_complete#complete
+      if executable('par')
+        autocmd FileType gitcommit setl formatprg=par\ -w72
+      endif
     augroup END
+  "}}}
+
+  Plug 'tpope/vim-rhubarb' "{{{
+    " Adds :Gbrowse for opening in Github
+  "}}}
+
+  Plug 'rhysd/committia.vim' "{{{
+    " Provides a more pleasant editing on Git commit messages
+  "}}}
+
+  Plug 'rhysd/git-messenger.vim'
+  Plug 'rhysd/conflict-marker.vim'
+  Plug 'knsh14/vim-github-link'
+
+  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+  Plug 'rhysd/github-complete.vim'
+      augroup config-github-complete
+          autocmd!
+          autocmd FileType gitcommit setl omnifunc=github_complete#complete
+      augroup END
+  "}}}
+
+  "------------------+
+  " Text helpers   {{{
+  "------------------+
+  Plug 'vim-scripts/matchit.zip' "{{{
+    " Extends the existing functionality of the % command, matching also
+    " parentheses, square and curly brackets, as well as conditional statements.
+  "}}}
+
+  Plug 'tmux-plugins/vim-tmux-focus-events' "{{{
+    " FocusGained and FocusLost autocommand events are not working in terminal vim. This plugin restores them when using vim inside Tmux.
+
+    " Here's where that matters:
+
+    " vim-fugitive plugin uses FocusGained for refreshing git branch in status line
+    " vim-gitgutter uses FocusGained for refreshing ... (wait for it) git gutter
+    " vim-tmux-clipboard uses FocusGained and FocusLost for refreshing clipboard.
+  "}}}
 "}}}
 
-"------------------+
-" Text helpers   {{{
-"------------------+
-Plug 'vim-scripts/matchit.zip' "{{{
-	" Extends the existing functionality of the % command, matching also
-	" parentheses, square and curly brackets, as well as conditional statements.
-"}}}
+  Plug 'christoomey/vim-tmux-navigator' "{{{
+    " Seemless navigation between tmux panes and vim splits
+  "}}}
 
-
-Plug 'tmux-plugins/vim-tmux-focus-events' "{{{
-	" FocusGained and FocusLost autocommand events are not working in terminal vim. This plugin restores them when using vim inside Tmux.
-
-	" Here's where that matters:
-
-	" vim-fugitive plugin uses FocusGained for refreshing git branch in status line
-	" vim-gitgutter uses FocusGained for refreshing ... (wait for it) git gutter
-	" vim-tmux-clipboard uses FocusGained and FocusLost for refreshing clipboard.
-"}}}
-
-Plug 'christoomey/vim-tmux-navigator' "{{{
-	" Seemless navigation between tmux panes and vim splits
-"}}}
-
-Plug 'SirVer/ultisnips'
-Plug 'dsznajder/vscode-es7-javascript-react-snippets'
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'valloric/youcompleteme'
-Plug 'tmsvg/pear-tree' " For pairing tags and parentheses
-" Debugger plugins"
-Plug 'puremourning/vimspector'
-Plug 'szw/vim-maximizer'
-" Better Syntax Support
-Plug 'sheerun/vim-polyglot'
-" NERDTree Plugins
-" ================================================================================================
-" Adds syntax highlighting to NERDTree based on filetype
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" Saves and restores the state of the NERDTree between sessions
-Plug 'scrooloose/nerdtree-project-plugin'
-" Highlights open files in a different color, CLoses a buffer directly from NERDTree
-Plug 'PhilRunninger/nerdtree-buffer-ops'
-" Enables NERDTree to open, delete, move, or copy multiple Visually-selected files at once
-Plug 'PhilRunninger/nerdtree-visual-selection'
-" Adds filetype-specific icons to NERDTree files and folders
-Plug 'ryanoasis/vim-devicons'
-" Airline (status bar on the bottom)
-Plug 'vim-airline/vim-airline' "{{{
-	" Lean and mean status/tabline for vim that's light as air
-Plug 'vim-airline/vim-airline-themes'
-	" Themes for airline
-	let g:airline_mode_map = {
-				\ '__'     : '-',
-				\ 'c'      : 'C',
-				\ 'i'      : 'Ins',
-				\ 'ic'     : 'Ins',
-				\ 'ix'     : 'Ins',
-				\ 'n'      : 'Nrm',
-				\ 'multi'  : 'M',
-				\ 'ni'     : 'N',
-				\ 'no'     : 'N',
-				\ 'R'      : 'R',
-				\ 'Rv'     : 'R',
-				\ 's'      : 'S',
-				\ 'S'      : 'S',
-				\ ''     : 'S',
-				\ 't'      : 'T',
-				\ 'v'      : 'Visual',
-				\ 'V'      : 'Visual',
-				\ ''     : 'Visual Blk',
-				\ }
-	let g:airline_powerline_fonts = 1
-	let g:airline_skip_empty_sections = 1
-	let g:airline#extensions#branch#format = 2
-	let g:airline_theme = 'luna'
-	let g:airline#extensions#ale#enabled = 1
-	let airline#extensions#ale#error_symbol = '❗ '
-	let airline#extensions#ale#warning_symbol = '⚠️  '
-	let airline#extensions#ale#open_lnum_symbol = " [\uE0A1 "
-	let airline#extensions#ale#close_lnum_symbol = '] '
-	let g:airline#extensions#coc#enabled = 1
-	let g:airline#extensions#languageclient#enabled = 1
-"}}}
-" REACH support "{{{
-"
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
-""}}}
-Plug 'frazrepo/vim-rainbow' " Rainbow parenthesis
+  Plug 'SirVer/ultisnips'
+  Plug 'dsznajder/vscode-es7-javascript-react-snippets'
+  Plug 'preservim/nerdtree'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'valloric/youcompleteme'
+  Plug 'tmsvg/pear-tree' " For pairing tags and parentheses
+  " Debugger plugins"
+  Plug 'puremourning/vimspector'
+  Plug 'szw/vim-maximizer'
+  " Better Syntax Support
+  Plug 'sheerun/vim-polyglot'
+  " NERDTree Plugins
+  " ================================================================================================
+  " Adds syntax highlighting to NERDTree based on filetype
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+  " Saves and restores the state of the NERDTree between sessions
+  Plug 'scrooloose/nerdtree-project-plugin'
+  " Highlights open files in a different color, CLoses a buffer directly from NERDTree
+  Plug 'PhilRunninger/nerdtree-buffer-ops'
+  " Enables NERDTree to open, delete, move, or copy multiple Visually-selected files at once
+  Plug 'PhilRunninger/nerdtree-visual-selection'
+  " Adds filetype-specific icons to NERDTree files and folders
+  Plug 'ryanoasis/vim-devicons'
+  " Airline (status bar on the bottom)
+  Plug 'vim-airline/vim-airline' "{{{
+    " Lean and mean status/tabline for vim that's light as air
+  Plug 'vim-airline/vim-airline-themes'
+    " Themes for airline
+    let g:airline_mode_map = {
+          \ '__'     : '-',
+          \ 'c'      : 'C',
+          \ 'i'      : 'Ins',
+          \ 'ic'     : 'Ins',
+          \ 'ix'     : 'Ins',
+          \ 'n'      : 'Nrm',
+          \ 'multi'  : 'M',
+          \ 'ni'     : 'N',
+          \ 'no'     : 'N',
+          \ 'R'      : 'R',
+          \ 'Rv'     : 'R',
+          \ 's'      : 'S',
+          \ 'S'      : 'S',
+          \ ''       : 'S',
+          \ 't'      : 'T',
+          \ 'v'      : 'Visual',
+          \ 'V'      : 'Visual',
+          \ 'VBlock'       : 'Visual Blk',
+          \ }
+    let g:airline_powerline_fonts = 1
+    let g:airline_skip_empty_sections = 1
+    let g:airline#extensions#branch#format = 2
+    let g:airline_theme = 'luna'
+    " let g:airline_left_sep = '»'
+    " let g:airline_left_sep = '▶'
+    " let g:airline_right_sep = '«'
+    " let g:airline_right_sep = '◀'
+    " let g:airline_symbols.crypt = '🔒'
+    " let g:airline_symbols.linenr = '␊'
+    " let g:airline_symbols.linenr = '␤'
+    " let g:airline_symbols.linenr = '¶'
+    " let g:airline_symbols.maxlinenr = '☰'
+    " let g:airline_symbols.branch = '⎇'
+    " let g:airline_symbols.paste = 'ρ'
+    " let g:airline_symbols.paste = 'Þ'
+    " let g:airline_symbols.paste = '∥'
+    " let g:airline_symbols.spell = 'Ꞩ'
+    " let g:airline_symbols.notexists = '∄'
+    " let g:airline_symbols.whitespace = 'Ξ'
+    let g:airline#extensions#ale#enabled = 1
+    let airline#extensions#ale#error_symbol = '❗ '
+    let airline#extensions#ale#warning_symbol = '⚠️  '
+    let airline#extensions#ale#open_lnum_symbol = " [\uE0A1 "
+    let airline#extensions#ale#close_lnum_symbol = '] '
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#buffer_idx_mode = 1
+    let g:airline#extensions#tabline#fnamemod = ':t'
+    let g:airline#extensions#tabline#left_sep = ''
+    let g:airline#extensions#tabline#left_alt_sep = ''
+    let g:airline#extensions#tabline#right_sep = ''
+    let g:airline#extensions#tabline#right_alt_sep = ''
+    let g:airline#extensions#tabline#formatter = 'default'
+    let g:airline#extensions#coc#enabled = 1
+    let g:airline#extensions#languageclient#enabled = 1
+  "}}}
+  " REACH support "{{{
+  "
+  Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+  ""}}}
+  Plug 'frazrepo/vim-rainbow' " Rainbow parenthesis
 call plug#end()
-" -----------------------------------------------------------------------------
 
 " ============================================================================
 " Install plugins the first time vim runs
@@ -305,7 +293,7 @@ endif
 filetype plugin indent on " Required!
 
 set mouse-=a               " disable custom mouse in vim (so that we can select)
-set guifont=CaskaydiaCove\ Nerd\ Font\ Mono:h15
+set guifont=CaskaydiaCove\ Nerd\ Font\ Mono\ Regular:h12
 syntax on                   " syntax highlighting
 set nomodeline
 set updatetime=300
@@ -332,8 +320,8 @@ set matchpairs+=<:>
 " Set to autoread when a file is changed from the outside
 set autoread
 " Hide the mouse cursor when typing
- set mousehide
- " Reports always the amount of changed lines
+set mousehide
+" Reports always the amount of changed lines
 set report=0
 " marks: 1000 files, history lines: 1000 lines, search queries: 1000 patterns, registers: 1000
 set viminfo='1000,f1,:1000,/1000,<1000,s100
@@ -375,6 +363,7 @@ set ignorecase
 set smartcase               " ignore case if search pattern is all lowercase,
                             " case-sensitive otherwise
 set cmdheight=2             " more space for displaying msgs
+"}}}
 "------------------------------------+
 " Wild menu (Autocompletion)       {{{
 "------------------------------------+
@@ -387,15 +376,14 @@ set scrolloff=5
 set sidescrolloff=20
 " The screen won't be redrawn unless actions took place
 set lazyredraw
-
 " Improves smoothness of redrawing when there are multiple windows and the
 " terminal does not support a scrolling region
 set ttyfast
-
 " When moving thru the lines, the cursor will try to stay in the previous columns
 set nostartofline
 " set completeopt=menu,menuone,longest
 set completeopt=menu,menuone,preview,noselect,noinsert
+"}}}
 "----------------------------------------------------------------------------//
 " FOLDING                                                                   {{{
 "----------------------------------------------------------------------------//
@@ -506,8 +494,6 @@ set pumheight=15
 set diffopt+=context:3
 set linebreak " Maintain the whole word when wrapping
 
-
-
 " Highlight conflict markers"
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " Shortcut to jump to next conflict marker"
@@ -520,7 +506,6 @@ match RedundantSpaces / \+\ze\t/
 match errorMsg /[^\t]\zs\t+/
 
 let g:rainbow_active = 1
-
 let g:rainbow_load_separately = [
     \ [ '*' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
     \ [ '*.tex' , [['(', ')'], ['\[', '\]']] ],
@@ -593,11 +578,12 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+inoremap <silent><expr> <c-space> coc#refresh()
+" if has('nvim')
+"   inoremap <silent><expr> <c-space> coc#refresh()
+" else
+"   inoremap <silent><expr> <c-@> coc#refresh()
+" endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
@@ -751,8 +737,8 @@ let g:fzf_preview_buffers_jump = 0
 
 " Commands used for fzf preview.
 " The file name selected by fzf becomes {}
-let g:fzf_preview_command = 'cat'                               " Not installed bat
-" let g:fzf_preview_command = 'bat --color=always --plain {-1}' " Installed bat
+" let g:fzf_preview_command = 'cat'                               " Not installed bat
+let g:fzf_preview_command = 'bat --color=always --plain {-1}' " Installed bat
 
 " g:fzf_binary_preview_command is executed if this command succeeds, and g:fzf_preview_command is executed if it fails
 let g:fzf_preview_if_binary_command = '[[ "$(file --mime {})" =~ binary ]]'
@@ -761,8 +747,8 @@ let g:fzf_preview_if_binary_command = '[[ "$(file --mime {})" =~ binary ]]'
 let g:fzf_binary_preview_command = 'echo "{} is a binary file"'
 
 " Commands used to get the file list from project
-let g:fzf_preview_filelist_command = 'git ls-files --exclude-standard'               " Not Installed ripgrep
-" let g:fzf_preview_filelist_command = 'rg --files --hidden --follow --no-messages -g \!"* *"' " Installed ripgrep
+" let g:fzf_preview_filelist_command = 'git ls-files --exclude-standard'               " Not Installed ripgrep
+let g:fzf_preview_filelist_command = 'rg --files --hidden --follow --no-messages -g \!"* *"' " Installed ripgrep
 
 " Commands used to get the file list from git repository
 let g:fzf_preview_git_files_command = 'git ls-files --exclude-standard'
@@ -877,45 +863,6 @@ nnoremap <S-f> :NERDTreeFind<CR>
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
 
-
-" Plugin Settings {
-" Airline {
-" if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-" endif
-
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#buffer_idx_mode = 1
-" let g:airline#extensions#tabline#fnamemod = ':t'
-" let g:airline#extensions#tabline#left_sep = ''
-" let g:airline#extensions#tabline#left_alt_sep = ''
-" let g:airline#extensions#tabline#right_sep = ''
-" let g:airline#extensions#tabline#right_alt_sep = ''
-" let g:airline#extensions#tabline#formatter = 'default'
-
-" unicode symbols
-" let g:airline_left_sep = '»'
-" let g:airline_left_sep = '▶'
-" let g:airline_right_sep = '«'
-" let g:airline_right_sep = '◀'
-" let g:airline_symbols.crypt = '🔒'
-" let g:airline_symbols.linenr = '␊'
-" let g:airline_symbols.linenr = '␤'
-" let g:airline_symbols.linenr = '¶'
-" let g:airline_symbols.maxlinenr = '☰'
-" let g:airline_symbols.maxlinenr = ''
-" let g:airline_symbols.branch = '⎇'
-" let g:airline_symbols.paste = 'ρ'
-" let g:airline_symbols.paste = 'Þ'
-" let g:airline_symbols.paste = '∥'
-" let g:airline_symbols.spell = 'Ꞩ'
-" let g:airline_symbols.notexists = '∄'
-" let g:airline_symbols.whitespace = 'Ξ'
-
-" Theme ( github.com/vim-airline/vim-airline-themes
-" let g:airline_theme= 'gruvbox'
-" }
-
 " Experimental {
 " Search and Replace
 nmap <Leader>s :%s//g<Left><Left>
@@ -923,7 +870,7 @@ nmap <Leader>s :%s//g<Left><Left>
 
 
 " Customizing Indentlines
-let g:indentLine_setColors = 0
+let g:indentLine_setColors = 1
 let g:indentLine_defaultGroup = 'SpecialKey'
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indentLine_concealcursor = 'inc'
@@ -1004,11 +951,7 @@ augroup END
 " let g:OmniSharp_want_snippet=1
 
 
-
-
 " Keybindings {
-" Save file
-nnoremap <leader>w :w<CR>
 "Copy and paste from system clipboard
 vmap <leader>y "+y
 vmap <leader>d "+d
@@ -1019,7 +962,6 @@ vmap <leader>P "+P
 
 
 "Use this variable to change symbols.
-
 "vim
 let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ 'Modified'  :'✹',
@@ -1043,19 +985,11 @@ let NERDTreeShowHidden=1 " Show hidden files in NERDTree
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
-
+set updatetime=100
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+set signcolumn=number
+set signcolumn=yes
 
 " Default rules for matching in pear-tree:
 let g:pear_tree_pairs = {
@@ -1076,8 +1010,8 @@ let g:pear_tree_ft_disabled = []
 let g:pear_tree_repeatable_expand = 1
 
 " Smart pairs are disabled by default:
-let g:pear_tree_smart_openers = 0
-let g:pear_tree_smart_closers = 0
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 0
 
 " If enabled, smart pair functions timeout after 60ms:
@@ -1110,14 +1044,11 @@ highlight link multiple_cursors_visual Visual
 nnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
 vnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
 
-
-
 " For editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 
 " REMAPs
-
 " move cursor to other splits
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
@@ -1259,12 +1190,9 @@ iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius
 augroup Code Comments             "{{{
 "------------------------------------+
   " Horizontal Rule (78 char long)
-  autocmd FileType vim                           map <leader>hr
-  0i""---------------------------------------------------------------------------//<ESC>
-  autocmd FileType javascript,typescript,php,c,cpp,css      map <leader>hr
-  0i/**-------------------------------------------------------------------------**/<ESC>
-  autocmd FileType python,perl,ruby,sh,zsh,conf  map <leader>hr
-  0i##---------------------------------------------------------------------------//<ESC>
+  autocmd FileType vim                           map <leader>hr 0i""---------------------------------------------------------------------------//<ESC>
+  autocmd FileType javascript,typescript,php,c,cpp,css      map <leader>hr 0i/**-------------------------------------------------------------------------**/<ESC>
+  autocmd FileType python,perl,ruby,sh,zsh,conf  map <leader>hr 0i##---------------------------------------------------------------------------//<ESC>
   " Comment Banners (adds 5 spaces at each end)
   autocmd FileType vim                           map <leader>cb I"     <ESC>A     "<ESC>yyp0lv$hhr-yykPjj
       autocmd FileType python,perl,ruby,sh,zsh,conf  map <leader>cb I#     <ESC>A     #<ESC>yyp0lv$hhr-yykPjj
@@ -1280,7 +1208,7 @@ augroup General                   "{{{
   au FileType help au BufEnter,BufWinEnter <buffer> call <SID>SetupHelpWindow()
 
  function! s:SetupHelpWindow() "{{{
-    wincmd L
+    wincmd W
     vertical resize 93
     " vertical resize 83
     setl nonumber winfixwidth colorcolumn=
@@ -1446,7 +1374,6 @@ augroup END "}}}
 let g:SuperTabClosePreviewOnPopupClose = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_completion = 0
 
 
  " Remove newbie crutches in Command Mode
