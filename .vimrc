@@ -38,6 +38,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'Valloric/ListToggle' "{{{
     " Toggles the display of the QuickFix and the Location list
     " Mappings:
+    let g:lt_location_list_toggle_map = '<leader>tl'
+    let g:lt_quickfix_list_toggle_map = '<leader>tq'
     " <leader>tl for toggling the Location List
     " <leader>q for toggling the QuickFix
   "}}}
@@ -293,7 +295,7 @@ endif
 filetype plugin indent on " Required!
 
 set mouse-=a               " disable custom mouse in vim (so that we can select)
-set guifont=CaskaydiaCove\ Nerd\ Font\ Mono\ Regular:h12
+set guifont=CaskaydiaCove\ Nerd\ Font\ Mono:h12
 syntax on                   " syntax highlighting
 set nomodeline
 set updatetime=300
