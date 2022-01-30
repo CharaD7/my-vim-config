@@ -24,20 +24,6 @@ endif
 " Synstastic loading
 " execute pathogen#infect()
 
-nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
-cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
-
-function! FindConfig(prefix, what, where)
-    let cfg = findfile(a:what, escape(a:where, ' ') . ';')
-    return cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
-endfunction
-
-autocmd FileType javascript let b:syntastic_javascript_jscs_args =
-    \ get(g:, 'syntastic_javascript_jscs_args', '') .
-    \ FindConfig('-c', '.jscsrc', expand('<afile>:p:h', 1))
-
-" ============================================================================
-
 " ---- PLUGINS ----------------------------------------------------------------
 "
 " https://github.com/junegunn/vim-plug
@@ -651,6 +637,9 @@ nmap <leader>rn <Plug>(coc-rename)
 " Formatting selected code.
 xmap <leader>FT  <Plug>(coc-format-selected)
 nmap <leader>FT  <Plug>(coc-format-selected)
+
+nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
+cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
 
 augroup mygroup
   autocmd!
