@@ -197,7 +197,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'dsznajder/vscode-es7-javascript-react-snippets'
   Plug 'preservim/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
-  Plug 'valloric/youcompleteme'
+  " Plug 'valloric/youcompleteme'
   Plug 'tmsvg/pear-tree' " For pairing tags and parentheses
   " Debugger plugins"
   Plug 'puremourning/vimspector'
@@ -209,8 +209,8 @@ call plug#begin('~/.vim/plugged')
   " Adds syntax highlighting to NERDTree based on filetype
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   " Saves and restores the state of the NERDTree between sessions
-  Plug 'scrooloose/nerdtree-project-plugin'
-  " Highlights open files in a different color, CLoses a buffer directly from NERDTree
+  " Plug 'scrooloose/nerdtree-project-plugin'
+  " Highlights open files in a different color, Closes a buffer directly from NERDTree
   Plug 'PhilRunninger/nerdtree-buffer-ops'
   " Enables NERDTree to open, delete, move, or copy multiple Visually-selected files at once
   Plug 'PhilRunninger/nerdtree-visual-selection'
@@ -587,9 +587,9 @@ inoremap <silent><expr> <c-space> coc#refresh()
 "   inoremap <silent><expr> <c-@> coc#refresh()
 " endif
 
-" Make <CR> auto-select the first completion item and notify coc.nvim to
+" Make <space> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+inoremap <silent><expr> <space> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -865,6 +865,8 @@ nnoremap <S-f> :NERDTreeFind<CR>
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
 
+nnoremap <leader>t :terminal<CR>
+
 " Experimental {
 " Search and Replace
 nmap <Leader>s :%s//g<Left><Left>
@@ -978,7 +980,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ 'Unknown'   :'?',
     \ }
 let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
-let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
+let g:NERDTreeGitStatusShowIgnored = 0 " a heavy feature may cost much more time. default: 0
 let g:NERDTreeGitStatusUntrackedFilesMode = 'all' " a heavy feature too. default: normal
 let g:NERDTreeGitStatusShowClean = 1 " default: 0
 let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
@@ -1373,9 +1375,9 @@ augroup END "}}}
 "}}}
 
 " Using supertabs and previews for youcompleteme
-let g:SuperTabClosePreviewOnPopupClose = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:SuperTabClosePreviewOnPopupClose = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+" let g:ycm_autoclose_preview_window_after_completion = 1
 
 
  " Remove newbie crutches in Command Mode
