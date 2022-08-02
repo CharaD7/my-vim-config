@@ -828,7 +828,7 @@ nnoremap <leader>G :<C-u>FzfPreviewProjectGrep . --resume<Space>
 " nnoremap <Leader>G :<C-u>CocCommand fzf-preview.ProjectGrep . --resume<Space>
 
 " Setting the shell
-set shell=fish
+set shell=tmux
 set suffixesadd=.js,.es,.jsx,.json,.tsx,.css,.less,.sass,.styl,.php,.py,.md
 
 autocmd FileType apache set commentstring=#\ %s
@@ -1102,14 +1102,14 @@ map q :quit<Return>
 map Q :qa<Return>
 " Move lines up or down
 " Normal mode
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
+nnoremap <c-a>j :m .+1<CR>==
+nnoremap <c-a>k :m .-2<CR>==
 " Insert mode
-inoremap <C-j> <ESC>:m .+1<CR>==gi
-inoremap <C-k> <ESC>:m .-2<CR>==gi
+inoremap <c-a>j <ESC>:m .+1<CR>==gi
+inoremap <c-a>k <ESC>:m .-2<CR>==gi
 " Visual mode
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
+vnoremap <c-a>j :m '>+1<CR>gv=gv
+vnoremap <c-a>k :m '<-2<CR>gv=gv
 
 
 " Spread buffer on tabline
