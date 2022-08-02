@@ -4,7 +4,7 @@
 " Avoid modifying this section, unless you are very sure of what you are doing
 
 let mapleader = ' '
-let g:mapleader = ' '
+let g:mapleader = ','
 
 let vim_plug_just_installed = 0
 let vim_plug_path = expand('~/.vim/autoload/plug.vim')
@@ -282,6 +282,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
   ""}}}
   Plug 'frazrepo/vim-rainbow' " Rainbow parenthesis
+  Plug 'mtth/scratch.vim' "For taking notes (Uses 'gs' to invoke command)
 call plug#end()
 
 " ============================================================================
@@ -299,8 +300,8 @@ set guifont=CaskaydiaCove\ Nerd\ Font\ Mono:h12
 syntax on                   " syntax highlighting
 set nomodeline
 set updatetime=300
-set shortmess+=c
 set signcolumn=yes
+set shortmess+=c
 set encoding=utf-8
 set iskeyword+=_,$,@,%,#
 " hides buffers instead of closing them. This means that you can have unwritten
@@ -357,6 +358,7 @@ set nobackup                " because undodir/undofile
 " Undo Directory and files         {{{
 "------------------------------------+
 set undodir=$HOME/.vim/.cache/undo
+set timeoutlen=300
 set undofile
 set undolevels=999
 set hlsearch                " highlight search terms
@@ -373,8 +375,8 @@ set wildmenu
 set laststatus=2
 set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp
 set wildmode=full
-" when scrolling, keep cursor 5 lines away from screen border
-set scrolloff=5
+" when scrolling, keep cursor 10 lines away from screen border
+set scrolloff=10
 set sidescrolloff=20
 " The screen won't be redrawn unless actions took place
 set lazyredraw
@@ -394,6 +396,7 @@ set foldmethod=marker
 " set foldlevel=99
 set foldcolumn=0
 set foldtext=FoldText()
+
 function! FoldText(...) "{{{
   " This function uses code from doy's vim-foldtext:
   " https://github.com/doy/vim-foldtext
@@ -523,14 +526,6 @@ hi  gitcommitFirstLine ctermfg=81
 hi  gitcommitSummary ctermfg=81
 hi  RubyKeywordAsMethod ctermfg=44
 
-"------------------------------------+
-" Fillchars/listchars/showbreak    {{{
-"------------------------------------+
-set fillchars=vert:║
-set listchars=tab:↹\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
-set showbreak=↪⋯⋯
-"}}}
-
 let g:closetag_filetypes = 'html,tsx,xhtml,erb,jsx,html.erb,eruby'
 let g:mta_filetypes = {
       \ 'javascript.jsx' : 1,
@@ -606,13 +601,11 @@ nmap <silent> gr <Plug>(coc-references)
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 inoremap <silent><expr> <c-space> coc#refresh()
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
     call CocActionAsync('doHover')
   else
-    execute '!' . &keywordprg . " " . expand('<cword>')
+    call feedkeys('K', 'in')
   endif
 endfunction
 
@@ -623,8 +616,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>FT  <Plug>(coc-format-selected)
-nmap <leader>FT  <Plug>(coc-format-selected)
+xmap <leader>ft  <Plug>(coc-format-selected)
+nmap <leader>ft  <Plug>(coc-format-selected)
 
 nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
 cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
@@ -679,21 +672,21 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <leader>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <leader>e  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <leader>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <leader>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <leader>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <leader>p  :<C-u>CocListResume<CR>
 
 
 
@@ -983,7 +976,7 @@ let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourse
 let g:NERDTreeGitStatusShowIgnored = 0 " a heavy feature may cost much more time. default: 0
 let g:NERDTreeGitStatusUntrackedFilesMode = 'all' " a heavy feature too. default: normal
 let g:NERDTreeGitStatusShowClean = 1 " default: 0
-let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
+let g:NERDTreeGitStatusConcealBrackets = 0 " default: 0
 let NERDTreeShowHidden=1 " Show hidden files in NERDTree
 
 
@@ -994,12 +987,14 @@ set updatetime=100
 set shortmess+=c
 set signcolumn=number
 set signcolumn=yes
+set notimeout
 
 " Default rules for matching in pear-tree:
 let g:pear_tree_pairs = {
             \ '(': {'closer': ')'},
             \ '[': {'closer': ']'},
             \ '{': {'closer': '}'},
+            \ '{/**': {'closer': '**/}'},
             \ "'": {'closer': "'"},
             \ '"': {'closer': '"'},
             \ '/**': {'closer': '**/'},
@@ -1125,7 +1120,10 @@ nnoremap <C-/> :Commentary<CR>
 vnoremap <C-/> :Commentary<CR>
 
 " Source vimrc file
-map <S-s> :source %<CR>
+map <S-s> :source ~/.vimrc<CR>
+
+" Open vimrc for editing
+map <leader>v :e ~/.vimrc<CR>
 
 " Toggle Foldings with the Ctrl+space bar
 nnoremap <C-Space> za<CR>
@@ -1168,8 +1166,10 @@ iab becuas because
 "------------------------------------+
 " Fillchars/listchars/showbreak    {{{
 "------------------------------------+
+set list                    " Show line breaks and carriage returns in editor
 set fillchars=vert:║
-set listchars=tab:↹\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+set listchars=tab:↹\ ,eol:↴,trail:⋅,extends:❯,precedes:❮
+" set listchars=tab:↹\ ,eol:↴,trail:⋅,extends:❯,precedes:❮,space:⋅
 set showbreak=↪⋯⋯
 "}}}
 
