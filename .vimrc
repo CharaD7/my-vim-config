@@ -828,7 +828,7 @@ nnoremap <leader>G :<C-u>FzfPreviewProjectGrep . --resume<Space>
 " nnoremap <Leader>G :<C-u>CocCommand fzf-preview.ProjectGrep . --resume<Space>
 
 " Setting the shell
-set shell=tmux
+set shell=fish
 set suffixesadd=.js,.es,.jsx,.json,.tsx,.css,.less,.sass,.styl,.php,.py,.md
 
 autocmd FileType apache set commentstring=#\ %s
