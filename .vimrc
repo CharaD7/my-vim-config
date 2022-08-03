@@ -4,7 +4,7 @@
 " Avoid modifying this section, unless you are very sure of what you are doing
 
 let mapleader = ' '
-let g:mapleader = ','
+let g:mapleader = ' '
 
 let vim_plug_just_installed = 0
 let vim_plug_path = expand('~/.vim/autoload/plug.vim')
@@ -34,6 +34,23 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-projectionist' "{{{
     " Provides granular project configuration using 'Projections'
   "}}}
+
+  Plug 'mg979/vim-visual-multi', {'branch': 'master'} "{{{
+    " Provides multiple cursor support
+  "}}}
+
+  "{{{" This is a utility to enable reactJs and TypeScript snippet support}}}
+  Plug 'SirVer/ultisnips'
+  Plug 'mlaursen/vim-react-snippets'
+  Plug 'mlaursen/mlaursen-vim-snippets'
+  Plug 'pangloss/vim-javascript'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'peitalin/vim-jsx-typescript'
+  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+  Plug 'jparise/vim-graphql'
+
+  Plug 'hail2u/vim-css3-syntax' " updates vim's built-in css to support CSS3
+  Plug 'cakebaker/scss-syntax.vim'
 
   Plug 'Valloric/ListToggle' "{{{
     " Toggles the display of the QuickFix and the Location list
@@ -87,6 +104,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mbbill/undotree'
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   Plug 'dense-analysis/ale' " for linting
+    " let g:ale_disable_lsp = 1
   " Plug 'zxqfl/tabnine-vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -96,7 +114,7 @@ call plug#begin('~/.vim/plugged')
   "--------------------------------------------------------------"
   Plug 'frazrepo/vim-rainbow'
   Plug 'tpope/vim-commentary'
-  Plug 'vim-scripts/vim-gitgutter'
+  Plug 'airblade/vim-gitgutter'
   Plug 'mattn/emmet-vim'
   Plug 'jiangmiao/auto-pairs'
   Plug 'doy/vim-foldtext' " folding
@@ -559,60 +577,126 @@ let g:fzf_action = {
 
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
+let g:coc_global_extensions=[
+  \ 'coc-css',
+  \ 'coc-pairs',
+  \ 'coc-stylelintplus',
+  \ 'coc-cssmodules',
+  \ 'coc-docker',
+  \ 'coc-eslint',
+  \ 'coc-json',
+  \ 'coc-html',
+  \ 'coc-prettier',
+  \ 'coc-tsserver',
+  \ 'coc-yaml',
+  \ 'coc-vimlsp',
+  \ 'coc-webview',
+  \ 'coc-markdown-preview-enhanced',
+  \ 'coc-spell-checker',
+  \ 'coc-snippets'
+  \ ]
+
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1):
-      \ CheckBackspace() ? "\<Tab>" :
+inoremap <silent><expr> <tab>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-" if has('nvim')
-"   inoremap <silent><expr> <c-space> coc#refresh()
-" else
-"   inoremap <silent><expr> <c-@> coc#refresh()
-" endif
+let g:coc_snippet_next = '<tab>'
 
-" Make <space> auto-select the first completion item and notify coc.nvim to
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-space> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <space> pumvisible() ? coc#_select_confirm()
+inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-" Use `[g` and `]g` to navigate diagnostics
+" Use `[j` and `[k` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [k <Plug>(coc-diagnostic-prev)
+nmap <silent> [j <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+" Format file
+nmap <silent> ff <Plug>(coc-format)
+
+" CocLists
+nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
+" nmap <leader>do <Plug>(coc-codeaction)
+
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-inoremap <silent><expr> <c-space> coc#refresh()
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
+" nnoremap <silent> K :call ShowDocumentation()<CR>
+" function! ShowDocumentation()
+"   if CocAction('hasProvider', 'hover')
+"     call CocActionAsync('doHover')
+"   else
+"     call feedkeys('K', 'in')
+"   endif
+" endfunction
+
+" Automtically show hover documentation after 500ms
+function! ShowDocIfNoDiagnostic(timer_id)
+  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
+    silent call CocActionAsync('doHover')
   endif
 endfunction
+
+function! s:show_hover_doc()
+  call timer_start(500, 'ShowDocIfNoDiagnostic')
+endfunction
+
+autocmd CursorHoldI * :call <SID>show_hover_doc()
+autocmd CursorHold * :call <SID>show_hover_doc()
+
+" fix-it -- show preview window of fixable things and choose fix
+nmap <silent>fi <Plug>(coc-codeaction)
+" fix current --  requires a region:
+" - fcw - fix-current-word
+" - fcl - fix-current-letter
+" - fcap - fix-current-paragraph
+nmap <silent>fc <Plug>(coc-codeaction-selected)
+" fix current selection
+vmap <silent>fc <Plug>(coc-codeaction-selected)
+
+" fix eslint (also any other fixable things. Mostly used for React hook dependencies)
+nmap <silent>fe <Plug>(coc-fix-current)
+
+" fix eslint (all)
+nmap <silent>fE :<C-u>CocCommand eslint.executeAutofix<cr>
+
+" fix imports
+nmap <silent>fI :<C-u>CocCommand tsserver.organizeImports<cr>
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -623,6 +707,35 @@ nmap <leader>rn <Plug>(coc-rename)
 " Formatting selected code.
 xmap <leader>ft  <Plug>(coc-format-selected)
 nmap <leader>ft  <Plug>(coc-format-selected)
+
+"  ================================================================
+" UltiSnips
+" ================================================================
+let g:UltiSnipsExpandTrigger='<c-space>'
+
+
+" ================================================================
+" vim-jsx
+" ================================================================
+" allow jsx syntax in .js files
+let g:jsx_ext_required=0
+
+
+" Make it so any .env files are correctly styled. Normally only worked with .env
+autocmd BufNewFile,BufRead * if expand('%t') =~ '\.env' | set filetype=sh | endif
+
+au BufRead,BufNewFile .babelrc,.eslintrc set ft=json
+
+" update scss files for SassDoc comments
+au FileType scss set comments^=:///
+
+" linux doesn't do this by default, so enable it just to be safe
+hi SpellBad cterm=underline
+
+" Enable TS and JS linting when in their respective files and leave when not
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+
 
 nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
 cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
@@ -904,53 +1017,8 @@ else
   set previewheight=5
 endif
 
-" Tell ALE to use OmniSharp for linting C# files, and no other linters.
-let g:ale_linters = { 'cs': ['OmniSharp'] }
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
 
-augroup omnisharp_commands
-  autocmd!
-
-  " Show type information automatically when the cursor stops moving.
-  " Note that the type is echoed to the Vim command line, and will overwrite
-  " any other messages in this space including e.g. ALE linting messages.
-  autocmd CursorHold *.cs OmniSharpTypeLookup
-
-  " The following commands are contextual, based on the cursor position.
-  autocmd FileType cs nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osfu <Plug>(omnisharp_find_usages)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osfi <Plug>(omnisharp_find_implementations)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ospd <Plug>(omnisharp_preview_definition)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ospi <Plug>(omnisharp_preview_implementations)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ost <Plug>(omnisharp_type_lookup)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osd <Plug>(omnisharp_documentation)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osfs <Plug>(omnisharp_find_symbol)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osfx <Plug>(omnisharp_fix_usings)
-  autocmd FileType cs nmap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
-  autocmd FileType cs imap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
-
-  " Navigate up and down by method/property/field
-  autocmd FileType cs nmap <silent> <buffer> [[ <Plug>(omnisharp_navigate_up)
-  autocmd FileType cs nmap <silent> <buffer> ]] <Plug>(omnisharp_navigate_down)
-  " Find all code errors/warnings for the current solution and populate the quickfix window
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osgcc <Plug>(omnisharp_global_code_check)
-  " Contextual code actions (uses fzf, vim-clap, CtrlP or unite.vim selector when available)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osca <Plug>(omnisharp_code_actions)
-  autocmd FileType cs xmap <silent> <buffer> <Leader>osca <Plug>(omnisharp_code_actions)
-  " Repeat the last code action performed (does not use a selector)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>os. <Plug>(omnisharp_code_action_repeat)
-  autocmd FileType cs xmap <silent> <buffer> <Leader>os. <Plug>(omnisharp_code_action_repeat)
-
-  autocmd FileType cs nmap <silent> <buffer> <Leader>os= <Plug>(omnisharp_code_format)
-
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osnm <Plug>(omnisharp_rename)
-
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osre <Plug>(omnisharp_restart_server)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osst <Plug>(omnisharp_start_server)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ossp <Plug>(omnisharp_stop_server)
-augroup END
-
-" Enable snippet completion, using the ultisnips plugin
-" let g:OmniSharp_want_snippet=1
 
 
 " Keybindings {
@@ -1064,10 +1132,11 @@ nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <silent> <leader>+ :vertical resize +5<CR>
 nnoremap <silent> <leader>- :vertical resize -5<CR>
 
-nmap ]c <Plug>GitGutterNextHunk
-nmap [c <Plug>GitGutterPrevHunk
-nmap <leader>hs <Plug>GitGutterStageHunk
-nmap <leader>hu <Plug>GitGutterUndoHunk
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+nmap ghp <Plug>(GitGutterPreviewHunk)
+nmap ghs <Plug>(GitGutterStageHunk)
+nmap ghu <Plug>(GitGutterUndoHunk)
 
 
 " Clear search highlighting
@@ -1228,6 +1297,9 @@ augroup General                   "{{{
       \ | hi DiffCol ctermbg=238 cterm=bold
       \ | match DiffCol /^[ +-]\([+-]\)\@!/
 
+ " Update gitsigns when file is saved
+ autocmd BufWritePost * GitGutter
+
  " Save on losing focus (after tabbing away or switching buffers)
  au FocusLost * :wa
 
@@ -1386,6 +1458,7 @@ augroup END "}}}
 
 
  " Remove newbie crutches in Command Mode
+ " A
 " cnoremap <Down> <Nop>
 " cnoremap <Left> <Nop>
 " cnoremap <Right> <Nop>
